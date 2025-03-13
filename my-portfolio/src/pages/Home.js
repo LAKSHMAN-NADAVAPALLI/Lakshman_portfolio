@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import styled, { keyframes } from "styled-components";
 import { Typewriter } from "react-simple-typewriter";
-import profilePic from "../assets/my photo.jpeg"; // Ensure you have a profile.jpg in the assets folder
+import profilePic from "../assets/my resume photo.jpg"; // Ensure you have a profile.jpg in the assets folder
 
 // Keyframe animation for color transition
 const colorAnimation = keyframes`
@@ -11,6 +11,11 @@ const colorAnimation = keyframes`
   50% { color: #3357ff; } /* Blue */
   75% { color: #ff33a8; } /* Pink */
   100% { color: #ff5733; } /* Red */
+`;
+
+const fadeIn = keyframes`
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
 `;
 
 // Styled Hero Section
@@ -24,16 +29,17 @@ const HeroSection = styled.section`
   background: ${(props) => props.theme.background};
   color: ${(props) => props.theme.text};
   padding: 2rem;
+  animation: ${fadeIn} 1s ease-in-out;
 `;
 
 // Styled Profile Image
 const ProfileImage = styled.img`
-  width: 120px;
-  height: 140px;
+  width: 140px;
+  height: 160px;
   border-radius: 50%;
   object-position: top;
   object-fit: cover;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.3);
   margin-bottom: 1rem;
   transition: transform 0.3s ease-in-out;
 
@@ -44,7 +50,7 @@ const ProfileImage = styled.img`
 
 // Styled Heading
 const Heading = styled.h1`
-  font-size: 2.8rem;
+  font-size: 3rem;
   font-weight: bold;
   margin-bottom: 0.5rem;
   transition: color 0.3s ease-in-out;
@@ -63,11 +69,22 @@ const AnimatedText = styled.span`
 
 // Styled Subheading
 const Subheading = styled.p`
-  font-size: 1.3rem;
+  font-size: 1.4rem;
   font-weight: 300;
   margin-bottom: 1.5rem;
-  max-width: 700px;
-  line-height: 1.6;
+  max-width: 800px;
+  line-height: 1.8;
+  color: ${(props) => props.theme.secondaryText};
+`;
+
+// Styled Quote
+const Quote = styled.blockquote`
+  font-size: 1.2rem;
+  font-style: italic;
+  color: ${(props) => props.theme.mutedText};
+  margin: 1rem 0;
+  border-left: 3px solid ${(props) => props.theme.accent};
+  padding-left: 1rem;
 `;
 
 // Styled Button
@@ -81,10 +98,25 @@ const CTAButton = styled(Link)`
   border-radius: 8px;
   text-decoration: none;
   transition: all 0.3s ease-in-out;
+  margin-top: 1rem;
 
   &:hover {
     background: ${(props) => props.theme.accent};
     transform: translateY(-3px);
+  }
+`;
+
+// Styled Scroll Down Indicator
+const ScrollDown = styled.div`
+  position: absolute;
+  bottom: 20px;
+  font-size: 1rem;
+  color: ${(props) => props.theme.mutedText};
+  animation: fadeIn 2s infinite;
+  cursor: pointer;
+
+  &:hover {
+    color: ${(props) => props.theme.accent};
   }
 `;
 
@@ -94,20 +126,38 @@ const Home = () => {
       <ProfileImage src={profilePic} alt="Lakshman Profile" />
       <Heading>Hi, I'm Nadavapalli Venkata Pavan Sai Sri Lakshman</Heading>
       <Subheading>
-        A passionate developer specializing in <strong>Full Stack Development</strong>, <strong>Cloud Computing</strong>, and <strong>Big Data Analytics</strong>. I love solving complex problems with innovative solutions.
+        A passionate developer specializing in <strong>Full Stack Development</strong>, 
+        <strong> Cloud Computing</strong>, and <strong>Big Data Analytics</strong>.  
+        I thrive on solving complex problems and building innovative solutions using modern technologies.
       </Subheading>
+
+      <Quote>
+        "Code is like humor. When you have to explain it, it’s bad." — Cory House
+      </Quote>
+
       <AnimatedText>
         <Typewriter
-          words={["Full Stack Developer", "MERN Stack", "Cloud Enthusiast", "AI & Data Science"]}
+          words={[
+            "Full Stack Developer",
+            "MERN Stack Expert",
+            "Cloud Enthusiast",
+            "AI & Data Science",
+            "Cybersecurity Learner",
+          ]}
           loop={true}
           cursor
           cursorStyle="|"
-          typeSpeed={90}  // Smooth typing speed
-          deleteSpeed={60} // Balanced deleting speed
-          delaySpeed={1300} // Pause between words
+          typeSpeed={90}
+          deleteSpeed={60}
+          delaySpeed={1300}
         />
       </AnimatedText>
+
       <CTAButton to="/contact">Get in Touch</CTAButton>
+
+      <ScrollDown>
+        ↓ Scroll Down for More ↓
+      </ScrollDown>
     </HeroSection>
   );
 };

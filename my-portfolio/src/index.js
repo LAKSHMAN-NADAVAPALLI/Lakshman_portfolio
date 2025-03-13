@@ -19,11 +19,12 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 
 root.render(
   <React.StrictMode>
-    <BrowserRouter basename="/Lakshman_portfolio"> {/* ✅ Set correct basename */}
-      <ThemeProvider theme={theme}>
-        <App />
-      </ThemeProvider>
-    </BrowserRouter>
+    <BrowserRouter>
+  <ThemeProvider theme={theme}>
+    <App />
+  </ThemeProvider>
+</BrowserRouter>
+
   </React.StrictMode>
 );
 

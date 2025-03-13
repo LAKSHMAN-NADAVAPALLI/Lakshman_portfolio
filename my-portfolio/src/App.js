@@ -12,13 +12,16 @@ import Contact from "./pages/Contact";
 // 🎨 Themes for Light and Dark Modes
 const lightTheme = {
   mode: "light",
-  background: "#3446eb",
-  navBackground: "#ffff",
-  text: "#212529",
-  buttonBg: "#007bff",
-  buttonText: "#fff",
-  accent: "#0056b3",
+  background: `
+    radial-gradient(circle,rgb(45, 198, 225) 20%,rgb(26, 235, 189) 80%), 
+    linear-gradient(135deg,rgb(45, 198, 225), #a8328b 50%, #ff7eb3 100%)`,
+  navBackground: "#ffffff", // Clean white for professional contrast
+  text: "#1c1c1c", // Deep gray for sharp contrast
+  buttonBg: "#ff7eb3", // Warm pink for a vibrant look
+  buttonText: "#ffffff", // White for clean readability
+  accent: "#f4d03f", // Bright yellow for a pop of contrast
 };
+
 
 const darkTheme = {
   mode: "dark",
@@ -32,11 +35,21 @@ const darkTheme = {
 
 // 📌 Global Styles for Consistency
 const GlobalStyle = createGlobalStyle`
+  @keyframes moveGradient {
+    0% { background-position: 0% 0%; }
+    50% { background-position: 100% 100%; }
+    100% { background-position: 0% 0%; }
+  }
+
   body {
     margin: 0;
     padding: 0;
     font-family: 'Poppins', sans-serif;
     background: ${(props) => props.theme.background};
+    background-size: ${(props) =>
+      props.theme.mode === "light" ? "400% 400%" : "auto"};
+    animation: ${(props) =>
+      props.theme.mode === "light" ? "moveGradient 15s ease infinite" : "none"};
     color: ${(props) => props.theme.text};
     transition: all 0.5s ease-in-out;
   }

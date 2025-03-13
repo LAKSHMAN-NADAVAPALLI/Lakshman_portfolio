@@ -1,11 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { motion } from "framer-motion";
+import { Moon, Sun } from "lucide-react"; // Moon and Sun icons
 
 // Styled Navbar Container
 const Nav = styled.nav`
   background: ${(props) => props.theme.navBackground};
-  padding: 1rem;
+  padding: 1rem 2rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -14,35 +16,48 @@ const Nav = styled.nav`
 
 // Styled Nav Links
 const NavLinks = styled.div`
+  display: flex;
+  gap: 1.5rem;
+
   a {
     color: ${(props) => props.theme.text};
     text-decoration: none;
-    margin: 0 1rem;
-    font-weight: bold;
-  }
+    font-weight: 600;
+    font-size: 1rem;
+    transition: color 0.3s ease;
 
-  a:hover {
-    color: ${(props) => props.theme.accent};
+    &:hover {
+      color: ${(props) => props.theme.accent};
+    }
   }
 `;
 
-// Styled Button for Theme Toggle
-const ThemeButton = styled.button`
+// Styled Theme Toggle Button
+const ThemeButton = styled(motion.button)`
   background: ${(props) => props.theme.buttonBg};
   color: ${(props) => props.theme.buttonText};
   border: none;
-  padding: 0.5rem 1rem;
+  padding: 0.5rem;
   cursor: pointer;
-  font-weight: bold;
-  border-radius: 5px;
-  transition: 0.3s;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.3s ease;
+  width: 40px;
+  height: 40px;
 
   &:hover {
     background: ${(props) => props.theme.accent};
   }
+
+  svg {
+    width: 24px;
+    height: 24px;
+  }
 `;
 
-const Navbar = ({ toggleTheme }) => {
+const Navbar = ({ toggleTheme, themeMode }) => {
   return (
     <Nav>
       <NavLinks>
@@ -53,7 +68,21 @@ const Navbar = ({ toggleTheme }) => {
         <Link to="/projects">Projects</Link>
         <Link to="/contact">Contact</Link>
       </NavLinks>
-      <ThemeButton onClick={toggleTheme}>Toggle Theme</ThemeButton>
+      
+      {/* Animated Theme Button */}
+      <ThemeButton
+        onClick={toggleTheme}
+        whileTap={{ scale: 0.9 }}
+        initial={{ rotate: 0 }}
+        animate={{ rotate: themeMode === "dark" ? 180 : 0 }}
+        transition={{ type: "spring", stiffness: 200, damping: 15 }}
+      >
+        {themeMode === "dark" ? (
+          <Sun color="#f4d03f" />
+        ) : (
+          <Moon color="#212529" />
+        )}
+      </ThemeButton>
     </Nav>
   );
 };
