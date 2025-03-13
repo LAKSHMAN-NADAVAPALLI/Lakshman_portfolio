@@ -123,7 +123,7 @@ const certifications = [
   {
     name: "Red Hat Certified Enterprise Application Developer",
     description: "Earned the Red Hat Certified Enterprise Application Developer certification, demonstrating proficiency in building, deploying, and managing enterprise Java applications using Red Hat technologies.",
-    earned: "September 18, 2027",
+    earned: "September 18, 2024",
     link: "https://www.credly.com/badges/9c686d86-d5c7-429b-9f4c-736b12ea40ea/public_url",
     image: cImgR // Replace with actual image path
   },
