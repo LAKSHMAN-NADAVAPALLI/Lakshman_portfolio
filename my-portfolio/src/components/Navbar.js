@@ -67,6 +67,8 @@ const Navbar = ({ toggleTheme, themeMode }) => {
         <Link to="/certifications">Certifications</Link>
         <Link to="/projects">Projects</Link>
         <Link to="/contact">Contact</Link>
+        <Link to="/resume">Resume</Link>
+
       </NavLinks>
       
       {/* Animated Theme Button */}

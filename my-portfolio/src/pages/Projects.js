@@ -3,6 +3,8 @@ import { motion } from "framer-motion";
 import styled from "styled-components";
 import jobPortalImg from "../assets/online-job-portal.jpg";
 import movieTicketImg from "../assets/online-movie-ticketing-system.jpg";
+import cyberThreatImg from "../assets/cyberthreatdetectionsystem.jpeg"
+
 
 
 const Container = styled.div`
@@ -76,22 +78,39 @@ const Description = styled.p`
 `;
 
 const projects = [
+
+
   {
-    name: "Movie Ticket Booking System",
+    name: "AI-Powered Real-Time Cyber Threat Detection System",
     description:
-      "Developed a booking system with secure login, seat selection, and payment integration. Improved security with token-based authentication and encrypted data storage.",
-    tools: "JSP, MySQL, Red Hat CodeReady Studio",
-    link: "https://github.com/LAKSHMAN-NADAVAPALLI/MovieTicketBookingSystem",
-    image: movieTicketImg
-  },
-  {
+      "Developed a real-time cyber threat detection system using AI for anomaly detection and behavioral analysis. Integrated Flask-based AI models with Spring Boot backend for seamless threat prevention and dynamic firewall updates.",
+    tools: "Spring Boot (Java) Backend, Flask AI (Python), PyCharm, React.js Frontend, MongoDB Database",
+    link: "https://nadavapalli-lakshman-ai-cyber-threat-detection.vercel.app/", // Replace with actual link if different
+    image: cyberThreatImg
+},
+
+
+{
     name: "Online Job Portal",
     description:
       "Built a job portal allowing job seekers to search and apply for jobs. Integrated MongoDB for efficient data management and enhanced recommendation features.",
     tools: "MERN Stack (MongoDB, Express.js, React, Node.js), Visual Studio Code",
     link: "https://nadavapalli-lakshman-online-job-portal-using-react-lapy.vercel.app/",
     image: jobPortalImg
-  }
+  },
+  {
+    name: "Movie Ticket Booking System",
+    description:
+      "Developed a booking system with secure login, seat selection, and payment integration. Improved security with token-based authentication and encrypted data storage.",
+    tools: "JSP, MySQL, Red Hat CodeReady Studio",
+    link: "https://github.com/LAKSHMAN-NADAVAPALLI/MovieTicketBookingSystem/tree/main/MovieTicketBookingSystem",
+    image: movieTicketImg
+  },
+  
+
+
+
+
 ];
 
 function Projects() {

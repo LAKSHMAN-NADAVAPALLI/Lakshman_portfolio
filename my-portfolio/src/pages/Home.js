@@ -1,8 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import styled, { keyframes } from "styled-components";
+import { Link as ScrollLink } from "react-scroll";
+import About from "./About";
 import { Typewriter } from "react-simple-typewriter";
 import profilePic from "../assets/my resume photo.jpg"; // Ensure you have a profile.jpg in the assets folder
+import Projects from "./Projects";
+import Certifications from "./Certifications";
+import Skills from "./Skills";
 
 // Keyframe animation for color transition
 const colorAnimation = keyframes`
@@ -122,6 +127,7 @@ const ScrollDown = styled.div`
 
 const Home = () => {
   return (
+    <>
     <HeroSection>
       <ProfileImage src={profilePic} alt="Lakshman Profile" />
       <Heading>Hi, I'm Nadavapalli Venkata Pavan Sai Sri Lakshman</Heading>
@@ -156,9 +162,18 @@ const Home = () => {
       <CTAButton to="/contact">Get in Touch</CTAButton>
 
       <ScrollDown>
-        ↓ Scroll Down for More ↓
-      </ScrollDown>
+  <ScrollLink to="about" smooth={true} duration={500}>
+    ↓ Scroll Down for More ↓
+  </ScrollLink>
+</ScrollDown>
+
     </HeroSection>
+     <About />
+     <Skills/>
+     <Projects/>
+     <Certifications/>
+     
+     </>
   );
 };
 

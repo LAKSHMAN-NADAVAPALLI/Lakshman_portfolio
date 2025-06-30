@@ -8,30 +8,55 @@ import Skills from "./pages/Skills";
 import Certifications from "./pages/Certifications";
 import Projects from "./pages/Projects";
 import Contact from "./pages/Contact";
+import Resume from "./pages/Resume";
 
 // 🎨 Themes for Light and Dark Modes
-const lightTheme = {
+// lightTheme.js
+// lightTheme.js
+export const lightTheme = {
   mode: "light",
-  background: `
-    radial-gradient(circle,rgb(45, 198, 225) 20%,rgb(26, 235, 189) 80%), 
-    linear-gradient(135deg,rgb(45, 198, 225), #a8328b 50%, #ff7eb3 100%)`,
-  navBackground: "#ffffff", // Clean white for professional contrast
-  text: "#1c1c1c", // Deep gray for sharp contrast
-  buttonBg: "#ff7eb3", // Warm pink for a vibrant look
-  buttonText: "#ffffff", // White for clean readability
-  accent: "#f4d03f", // Bright yellow for a pop of contrast
+ background: `
+   radial-gradient(circle at 15% 25%, rgba(251, 131, 149, 0.35) 0%, transparent 45%),
+    radial-gradient(circle at 85% 75%, rgba(173, 216, 230, 0.3) 0%, transparent 45%),
+    linear-gradient(120deg, rgba(240, 240, 245, 0.92) 0%, rgba(255, 255, 255, 0.98) 100%);
+  
+  
+`,
+
+
+
+navBackground: `linear-gradient(to right, rgba(255, 245, 220, 0.95), rgba(255, 225, 240, 0.95), rgba(220, 240, 255, 0.95))`,
+
+
+ 
+  textColor: "#1c1c1c",
+  buttonBg: "#ff7eb3", 
+  buttonTextColor: "#ffffff", 
+  accent: "#f4d03f", 
+  skillCardBg: "#ffffff", 
+  skillTextColor: "#000000", 
+  hoverBgColor: "#e0f7fa", // soft aqua blue – vibrant but not harsh
+hoverTextColor: "#0d47a1", // deep blue – readable, professional
 };
 
-
-const darkTheme = {
+// darkTheme.js
+export const darkTheme = {
   mode: "dark",
   background: "#121212",
   navBackground: "#1c1c1c",
   text: "#ffffff",
+  
   buttonBg: "#bb86fc",
   buttonText: "#121212",
   accent: "#9a67ea",
+  skillCardBg: "#1e1e1e", // Dark background for skill cards
+  skillTextColor: "#ffffff", // White text for skill cards
+  hoverBgColor: "#2d2d2d", // elegant dark grey – subtle elevation
+hoverTextColor: "#80d8ff", // neon light blue – eye-catching on dark
+
+   
 };
+
 
 // 📌 Global Styles for Consistency
 const GlobalStyle = createGlobalStyle`
@@ -77,7 +102,7 @@ function App() {
   };
 
   useEffect(() => {
-    document.title = "My Portfolio";
+    document.title = "NADAVAPALLI VENKATA PAVAN SAI SRI LAKSHMAN";
   }, []);
 
   return (
@@ -92,6 +117,7 @@ function App() {
           <Route path="/certifications" element={<Certifications />} />
           <Route path="/projects" element={<Projects />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/resume" element={<Resume />} />
           <Route path="*" element={<Navigate to="/" />} /> {/* Redirect unknown paths to Home */}
         </Routes>
       </Container>

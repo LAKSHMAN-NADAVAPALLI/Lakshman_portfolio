@@ -3,11 +3,13 @@ import { motion } from "framer-motion";
 import styled from "styled-components";
 
 // Styled Components
+
 const Container = styled.div`
   padding: 50px;
   text-align: center;
   max-width: 900px;
   margin: auto;
+  
 `;
 
 const Title = styled.h1`
@@ -46,7 +48,8 @@ const ListItem = styled.li`
 
 const About = () => {
   return (
-    <Container>
+    <Container id="about">
+   
       <motion.div 
         initial={{ opacity: 0, x: -50 }} 
         animate={{ opacity: 1, x: 0 }} 
