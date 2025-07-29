@@ -12,6 +12,7 @@ const Nav = styled.nav`
   justify-content: space-between;
   align-items: center;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  min-height: 50px;
 `;
 
 // Styled Nav Links
@@ -20,17 +21,39 @@ const NavLinks = styled.div`
   gap: 1.5rem;
 
   a {
-    color: ${(props) => props.theme.text};
+    position: relative;
     text-decoration: none;
     font-weight: 600;
-    font-size: 1rem;
-    transition: color 0.3s ease;
+    font-size: 1.1rem;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    color: ${(props) => props.theme.buttonTextColor};
+    background: ${(props) => props.theme.buttonBg};
+    transition: all 0.3s ease;
 
     &:hover {
-      color: ${(props) => props.theme.accent};
+      background: ${(props) => props.theme.accent};
+      color: #fff;
+    }
+
+    &::after {
+      content: "";
+      position: absolute;
+      left: 10%;
+      bottom: 6px;
+      width: 0%;
+      height: 2px;
+      background: #fff;
+      transition: width 0.3s ease;
+    }
+
+    &:hover::after {
+      width: 80%;
     }
   }
 `;
+
+
 
 // Styled Theme Toggle Button
 const ThemeButton = styled(motion.button)`
@@ -80,7 +103,7 @@ const Navbar = ({ toggleTheme, themeMode }) => {
         transition={{ type: "spring", stiffness: 200, damping: 15 }}
       >
         {themeMode === "dark" ? (
-          <Sun color="#f4d03f" />
+          <Sun color="#e7c336ff" />
         ) : (
           <Moon color="#212529" />
         )}

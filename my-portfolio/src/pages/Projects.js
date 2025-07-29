@@ -1,12 +1,13 @@
 import React from "react";
-import { motion } from "framer-motion";
 import styled from "styled-components";
+import { motion } from "framer-motion";
+import { FaExternalLinkAlt } from "react-icons/fa";
+
 import jobPortalImg from "../assets/online-job-portal.jpg";
 import movieTicketImg from "../assets/online-movie-ticketing-system.jpg";
-import cyberThreatImg from "../assets/cyberthreatdetectionsystem.jpeg"
+import cyberThreatImg from "../assets/cyberthreatdetectionsystem.jpeg";
 
-
-
+// Styled Components
 const Container = styled.div`
   padding: 50px;
   text-align: center;
@@ -18,45 +19,39 @@ const Title = styled.h1`
   font-size: 2.5rem;
   font-weight: bold;
   margin-bottom: 30px;
-  color: ${(props) => props.theme.textColor};
+  color: ${(props) => props.theme.skillTextColor};
 `;
 
 const ProjectsGrid = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 20px;
+  gap: 25px;
 `;
 
-const ProjectCard = styled.a`
-  background: ${(props) => props.theme.cardBg};
-  color: ${(props) => props.theme.textColor};
+const Card = styled(motion.a)`
+  background: ${(props) => props.theme.skillCardBg};
+  color: ${(props) => props.theme.skillTextColor};
   width: 300px;
   padding: 20px;
-  border-radius: 12px;
+  border-radius: 16px;
   text-decoration: none;
-  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
+  box-shadow: 0px 6px 14px rgba(0, 0, 0, 0.12);
+  cursor: pointer;
 
   &:hover {
-    transform: translateY(-5px);
-    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
+    transform: scale(1.05) translateY(-8px);
+    box-shadow: 0px 12px 24px rgba(0, 0, 0, 0.2);
+    background-color: ${(props) => props.theme.hoverBgColor};
+    color: ${(props) => props.theme.hoverTextColor};
   }
 `;
 
 const ImageWrapper = styled.div`
   width: 100%;
   height: 180px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   overflow: hidden;
   border-radius: 10px;
-  margin-bottom: 15px;
 
   img {
     width: 100%;
@@ -65,78 +60,112 @@ const ImageWrapper = styled.div`
   }
 `;
 
+const CardContent = styled.div`
+  text-align: center;
+  margin-top: 15px;
+`;
+
 const ProjectTitle = styled.h2`
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   font-weight: bold;
-  margin-bottom: 10px;
 `;
 
 const Description = styled.p`
   font-size: 0.9rem;
-  color: ${(props) => props.theme.secondaryText};
-  margin-bottom: 10px;
+  margin-top: 5px;
+  color: ${(props) => props.theme.skillTextColor};
+`;
+
+const Tools = styled.p`
+  font-size: 0.85rem;
+  font-style: italic;
+  margin-top: 5px;
+  color: ${(props) => props.theme.skillTextColor};
+`;
+
+const ViewButton = styled.div`
+  margin-top: 12px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  background-color: ${(props) => props.theme.buttonBg};
+  color: ${(props) => props.theme.buttonTextColor};
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-weight: bold;
+  font-size: 0.9rem;
+
+  svg {
+    margin-left: 6px;
+  }
 `;
 
 const projects = [
-
-
   {
-    name: "AI-Powered Real-Time Cyber Threat Detection System",
+    name: "AI-Powered Cyber Threat Detection System",
     description:
-      "Developed a real-time cyber threat detection system using AI for anomaly detection and behavioral analysis. Integrated Flask-based AI models with Spring Boot backend for seamless threat prevention and dynamic firewall updates.",
-    tools: "Spring Boot (Java) Backend, Flask AI (Python), PyCharm, React.js Frontend, MongoDB Database",
-    link: "https://nadavapalli-lakshman-ai-cyber-threat-detection.vercel.app/", // Replace with actual link if different
-    image: cyberThreatImg
-},
-
-
-{
+      "AI-powered system for real-time threat detection using Flask AI + Spring Boot.",
+    tools: "Java, Spring Boot, Flask (Python), MongoDB, React",
+    link: "https://nadavapalli-lakshman-ai-cyber-threat-detection.vercel.app/",
+    image: cyberThreatImg,
+  },
+  {
     name: "Online Job Portal",
     description:
-      "Built a job portal allowing job seekers to search and apply for jobs. Integrated MongoDB for efficient data management and enhanced recommendation features.",
-    tools: "MERN Stack (MongoDB, Express.js, React, Node.js), Visual Studio Code",
+      "MERN Stack job portal with resume parsing, recommendation engine.",
+    tools: "MongoDB, Express.js, React, Node.js",
     link: "https://nadavapalli-lakshman-online-job-portal-using-react-lapy.vercel.app/",
-    image: jobPortalImg
+    image: jobPortalImg,
   },
   {
     name: "Movie Ticket Booking System",
     description:
-      "Developed a booking system with secure login, seat selection, and payment integration. Improved security with token-based authentication and encrypted data storage.",
+      "Secure movie booking with token-based auth, seat mapping, payments.",
     tools: "JSP, MySQL, Red Hat CodeReady Studio",
-    link: "https://github.com/LAKSHMAN-NADAVAPALLI/MovieTicketBookingSystem/tree/main/MovieTicketBookingSystem",
-    image: movieTicketImg
+    link: "https://github.com/LAKSHMAN-NADAVAPALLI/MovieTicketBookingSystem",
+    image: movieTicketImg,
   },
-  
-
-
-
-
 ];
 
-function Projects() {
+const Projects = () => {
   return (
     <Container>
       <motion.div
-        initial={{ opacity: 0, scale: 0.8 }}
+        initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.8 }}
+        transition={{ duration: 0.6 }}
       >
         <Title>Projects</Title>
         <ProjectsGrid>
           {projects.map((project, index) => (
-            <ProjectCard key={index} href={project.link} target="_blank" rel="noopener noreferrer">
+            <Card
+              key={index}
+              href={project.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: index * 0.1 }}
+            >
               <ImageWrapper>
                 <img src={project.image} alt={project.name} />
               </ImageWrapper>
-              <ProjectTitle>{project.name}</ProjectTitle>
-              <Description>{project.description}</Description>
-              <Description><strong>Tools:</strong> {project.tools}</Description>
-            </ProjectCard>
+              <CardContent>
+                <ProjectTitle>{project.name}</ProjectTitle>
+                <Description>{project.description}</Description>
+                <Tools>
+                  <strong>Tools:</strong> {project.tools}
+                </Tools>
+                <ViewButton>
+                  View Project <FaExternalLinkAlt />
+                </ViewButton>
+              </CardContent>
+            </Card>
           ))}
         </ProjectsGrid>
       </motion.div>
     </Container>
   );
-}
+};
 
 export default Projects;

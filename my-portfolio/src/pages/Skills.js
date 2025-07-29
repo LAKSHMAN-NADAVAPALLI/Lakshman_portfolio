@@ -1,12 +1,12 @@
 import React from "react";
 import { motion } from "framer-motion";
-import styled from "styled-components";
+import styled, { useTheme } from "styled-components";
 import {
   FaReact, FaNodeJs, FaPython, FaJava, FaAws, FaDocker, FaLinux, FaWindows, FaGit
 } from "react-icons/fa";
 import {
   SiMongodb, SiJavascript, SiCplusplus, SiCss3, SiMysql, SiPostgresql, SiDjango,
-  SiJirasoftware, SiTableau, SiKubernetes, SiOracle, SiHtml5, SiTailwindcss
+  SiTableau, SiKubernetes, SiOracle, SiHtml5, SiTailwindcss
 } from "react-icons/si";
 
 // Styled Components
@@ -21,12 +21,13 @@ const Title = styled.h1`
   font-size: 3rem;
   font-weight: bold;
   margin-bottom: 40px;
+  color: ${(props) => props.theme.skillTextColor}; // ✅ Dark mode text fix
 `;
 
 const CategoryTitle = styled.h2`
   font-size: 2rem;
   margin: 40px 0 20px;
-  color: ${(props) => props.theme.skillTextColor};
+  color: ${(props) => props.theme.skillTextColor}; // ✅ Dark mode text fix
 `;
 
 const SkillsGrid = styled.div`
@@ -57,29 +58,8 @@ const SkillCard = styled(motion.div)`
   &:hover {
     transform: scale(1.1) translateY(-10px);
     box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
-    background-color: ${(props) => props.theme.hoverBgColor}; // Change hover background color
-    color: ${(props) => props.theme.hoverTextColor}; // Change hover text color
-  }
-
-
-  
-
-  /* Animation on load */
-  initial={{ opacity: 0, y: 20 }}
-  animate={{ opacity: 1, y: 0 }}
-  transition={{ delay: 0.2 }}
-  
-  /* Keyframes for the slight hover animation */
-  @keyframes hover-move {
-    0% {
-      transform: scale(1) translateY(0);
-    }
-    50% {
-      transform: scale(1.05) translateY(-5px);
-    }
-    100% {
-      transform: scale(1.1) translateY(-10px);
-    }
+    background-color: ${(props) => props.theme.hoverBgColor};
+    color: ${(props) => props.theme.hoverTextColor};
   }
 `;
 
@@ -109,23 +89,25 @@ const skillsData = {
     { name: "Oracle Cloud", icon: <SiOracle size={40} color="#F80000" /> }
   ],
   "Languages": [
-    { name: "C", icon: <SiCplusplus size={40} color="#A8B9CC" /> }, // Reuse C++ icon for C
+    { name: "C", icon: <SiCplusplus size={40} color="#A8B9CC" /> }, // Using C++ icon for C
     { name: "C++", icon: <SiCplusplus size={40} color="#00599C" /> },
     { name: "Java", icon: <FaJava size={40} color="#007396" /> },
     { name: "Python", icon: <FaPython size={40} color="#3776AB" /> },
-    { name: "JavaScript", icon: <SiJavascript size={40} color="#F7DF1E" /> },
-    { name: "R", icon: <SiPostgresql size={40} color="#276DC3" /> } // No R icon, using PostgreSQL blue
+    { name: "JavaScript", icon: <SiJavascript size={40} color="#F7DF1E" /> }
   ],
   "Tools": [
     { name: "Git", icon: <FaGit size={40} color="#F05032" /> },
     { name: "Windows", icon: <FaWindows size={40} color="#0078D6" /> },
     { name: "Linux", icon: <FaLinux size={40} color="#FCC624" /> },
-    { name: "Jira", icon: <SiJirasoftware size={40} color="#0052CC" /> },
     { name: "Tableau", icon: <SiTableau size={40} color="#E97627" /> }
   ]
 };
 
 const Skills = () => {
+   // 🔥 Dynamic theme detection (dark/light)
+   const theme = useTheme();
+console.log("Current theme mode:", theme.mode);
+
   return (
     <Container>
       <motion.div
@@ -134,7 +116,6 @@ const Skills = () => {
         transition={{ duration: 0.6 }}
       >
         <Title>Skills</Title>
-
         {Object.entries(skillsData).map(([category, skills], index) => (
           <div key={category}>
             <CategoryTitle>{category}</CategoryTitle>
