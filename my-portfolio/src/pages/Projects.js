@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { motion } from "framer-motion";
 import { FaExternalLinkAlt } from "react-icons/fa";
 
-import jobPortalImg from "../assets/online-job-portal.jpg";
+import jobPortalImg from "../assets/ojbscreen.png";
 import movieTicketImg from "../assets/online-movie-ticketing-system.jpg";
 import cyberThreatImg from "../assets/cyberthreatdetectionsystem.jpeg";
 

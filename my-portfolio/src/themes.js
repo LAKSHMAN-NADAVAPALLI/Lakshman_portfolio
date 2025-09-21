@@ -3,10 +3,10 @@
 export const lightTheme = {
   mode: "light",
   background: `
-    radial-gradient(circle at 15% 25%, rgba(255, 4, 130, 0.7) 0%, transparent 30%), // Soft pinkish-white
-    radial-gradient(circle at 85% 75%, rgba(255, 4, 125, 0.7) 0%, transparent 30%), // Gentle greenish-white
-    radial-gradient(circle at 50% 50%, rgba(0, 255, 225, 0.6) 0%, transparent 60%), // Light lavender
-    linear-gradient(135deg, #a2f4f3ff 0%, #d94085ff 100%) // Base gradient from a soft blue to a gentle rose
+    radial-gradient(circle at 15% 25%, rgba(241, 109, 175, 0.7) 0%, transparent 30%), // Soft pinkish-white
+    radial-gradient(circle at 85% 75%, rgba(246, 108, 174, 0.7) 0%, transparent 30%), // Gentle greenish-white
+    radial-gradient(circle at 50% 50%, rgba(115, 240, 226, 0.6) 0%, transparent 60%), // Light lavender
+    linear-gradient(135deg, #a2f4f3ff 0%, #f778b1ff 100%) // Base gradient from a soft blue to a gentle rose
   `,
 
 
