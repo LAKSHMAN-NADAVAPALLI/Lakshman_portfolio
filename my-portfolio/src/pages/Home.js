@@ -2,169 +2,211 @@ import React from "react";
 import { Link } from "react-router-dom";
 import styled, { keyframes } from "styled-components";
 import { Link as ScrollLink } from "react-scroll";
+import { Typewriter } from "react-simple-typewriter";
+import Experience from "./Experience";
+
 import About from "./About";
 import Projects from "./Projects";
 import Certifications from "./Certifications";
 import Skills from "./Skills";
-import profilePic from "../assets/my resume photo.jpg";
-import { Typewriter } from "react-simple-typewriter";
 
-// Animations
-const colorAnimation = keyframes`
-  0% { color: #ff5733; }
-  25% { color: #33ff57; }
-  50% { color: #3357ff; }
-  75% { color: #ff33a8; }
-  100% { color: #ff5733; }
-`;
+import profilePic from "../assets/my resume photo.jpg";
+
+/* ---------------- Animations ---------------- */
 
 const fadeIn = keyframes`
   from { opacity: 0; transform: translateY(20px); }
   to { opacity: 1; transform: translateY(0); }
 `;
 
+const skillColors = keyframes`
+  0% { color: #ff2f00ff; }
+  25% { color: #00ff2fff; }
+  50% { color: #ff0090ff; }
+  75% { color: #00ffddff; }
+  100% { color: #ff2f00ff; }
+`;
+
+/* ---------------- Layout ---------------- */
+
 const HeroSection = styled.section`
+  min-height: 100vh;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
   align-items: center;
-  text-align: center;
-  height: 100vh;
   background: ${(props) => props.theme.background};
   color: ${(props) => props.theme.textColor};
-  padding: 2rem;
+  padding: 3rem 2rem;
   animation: ${fadeIn} 1s ease-in-out;
 `;
 
-const ProfileImage = styled.img`
-  width: 140px;
-  height: 160px;
-  border-radius: 50%;
-  object-position: top;
-  object-fit: cover;
-  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.3);
+const Wrapper = styled.div`
+  max-width: 1200px;
+  width: 100%;
+  margin: auto;
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 4rem;
+  align-items: center;
+
+  @media (max-width: 900px) {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+`;
+
+const TextBlock = styled.div``;
+
+/* ---------------- Text ---------------- */
+
+const Headline = styled.h1`
+  font-size: 3.2rem;
+  font-weight: 900;
+  line-height: 1.2;
   margin-bottom: 1rem;
-  transition: transform 0.3s ease-in-out;
-  &:hover {
-    transform: scale(1.1);
+  color: ${(props) => props.theme.accent};
+
+  @media (max-width: 900px) {
+    font-size: 2.5rem;
   }
 `;
 
-const Heading = styled.h1`
-  font-size: 3rem;
-  font-weight: bold;
-  margin-bottom: 0.5rem;
-  
-  color: #ffffffff;
-
-  transition: color 0.3s ease-in-out;
-
-  &:hover {
-   
-    color: #fa0000ff; 
-  }
-`;
-
-
-const AnimatedText = styled.span`
-  font-size: 1.8rem;
-  font-weight: bold;
-  animation: ${colorAnimation} 5s infinite alternate ease-in-out;
-`;
-
-const Subheading = styled.p`
-  font-size: 1.4rem;
-  font-weight: 300;
-  margin-bottom: 1.5rem;
-  max-width: 800px;
-  line-height: 1.8;
-  color: ${(props) => props.theme.textColor};
-`;
-
-const Quote = styled.blockquote`
+const Subtext = styled.p`
   font-size: 1.2rem;
-  font-style: italic;
+  line-height: 1.8;
+  max-width: 520px;
+  margin-bottom: 1.5rem;
   color: ${(props) => props.theme.textColor};
-  margin: 1rem 0;
-  border-left: 3px solid ${(props) => props.theme.accent};
-  padding-left: 1rem;
+
+  @media (max-width: 900px) {
+    margin: auto;
+    margin-bottom: 1.5rem;
+  }
 `;
 
-const CTAButton = styled(Link)`
+const Focus = styled.div`
+  font-size: 2.04rem;
+  font-weight: 900;
+  margin-bottom: 2rem;
+  animation: ${skillColors} 6s infinite;
+`;
+
+/* ---------------- Button ---------------- */
+
+const CTA = styled(Link)`
   display: inline-block;
   background: ${(props) => props.theme.buttonBg};
-  color: ${(props) => props.theme.buttonTextColor};
-  padding: 0.75rem 1.5rem;
-  font-size: 1.2rem;
-  font-weight: bold;
+  color: ${(props) => props.theme.buttonTextColor || "#000"};
+  padding: 0.9rem 2rem;
   border-radius: 8px;
+  font-weight: bold;
   text-decoration: none;
-  transition: all 0.3s ease-in-out;
-  margin-top: 1rem;
+  transition: 0.3s ease;
 
   &:hover {
     background: ${(props) => props.theme.accent};
+    color: #fff;
     transform: translateY(-3px);
   }
 `;
 
+
+
+/* ---------------- Image ---------------- */
+
+const ImageStack = styled.div`
+  position: relative;
+  width: 320px;
+  height: 380px;
+  margin-left: auto;
+
+  @media (max-width: 900px) {
+    margin: 2rem auto 0;
+  }
+`;
+
+const MainImage = styled.img`
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 260px;
+  height: 320px;
+  object-fit: cover;
+  border-radius: 12px;
+  z-index: 2;
+  box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+`;
+
+/* ---------------- Scroll ---------------- */
+
 const ScrollDown = styled.div`
   position: absolute;
   bottom: 20px;
-  font-size: 1rem;
-  color: ${(props) => props.theme.textColor};
-  animation: fadeIn 2s infinite;
+  width: 100%;
+  text-align: center;
   cursor: pointer;
+  color: ${(props) => props.theme.textColor};
 
   &:hover {
     color: ${(props) => props.theme.accent};
   }
 `;
 
+/* ---------------- Component ---------------- */
+
 const Home = () => {
   return (
     <>
       <HeroSection>
-        <ProfileImage src={profilePic} alt="Lakshman Profile" />
-        <Heading>Hi, I'm Nadavapalli Venkata Pavan Sai Sri Lakshman</Heading>
-        <Subheading>
-          A passionate developer specializing in <strong>Full Stack Development</strong>,
-          <strong> Cloud Computing</strong>, and <strong>Big Data Analytics</strong>.
-          I thrive on solving complex problems and building innovative solutions using modern technologies.
-        </Subheading>
+        <Wrapper>
+          <TextBlock>
+            <Headline>
+  Hi, I'm Lakshman
+</Headline>
 
-        <Quote>
-          "Code is like humor. When you have to explain it, it’s bad." — Cory House
-        </Quote>
+<Subtext>
+  Aspiring Software Engineer specializing in scalable backend development,
+  cloud technologies, and modern full stack engineering with a strong focus
+  on performance, system design, and real-world problem solving.
+</Subtext>
 
-        <AnimatedText>
-          <Typewriter
-            words={[
-              "Full Stack Developer",
-              "MERN Stack Expert",
-              "Cloud Enthusiast",
-              "AI & Data Science",
-              "Cybersecurity Learner",
-            ]}
-            loop={true}
-            cursor
-            cursorStyle="|"
-            typeSpeed={90}
-            deleteSpeed={60}
-            delaySpeed={1300}
-          />
-        </AnimatedText>
+            <Focus>
+              <Typewriter
+                words={[
+                  "DSA & Problem Solving",
+                  "Java • Spring Boot • MERN",
+                  "AWS & Cloud Engineering",
+                ]}
+                loop
+                cursor
+                cursorStyle="|"
+                typeSpeed={70}
+                deleteSpeed={50}
+                delaySpeed={1200}
+              />
+            </Focus>
 
-        <CTAButton to="/contact">Get in Touch</CTAButton>
+            <CTA to="/contact">Contact Me</CTA>
+          </TextBlock>
+
+          <ImageStack>
+            <MainImage src={profilePic} alt="Lakshman Profile" />
+          </ImageStack>
+        </Wrapper>
 
         <ScrollDown>
-          <ScrollLink to="about" smooth={true} duration={500}></ScrollLink>
+          <ScrollLink to="about" smooth duration={500}>
+            Scroll ↓
+          </ScrollLink>
         </ScrollDown>
       </HeroSection>
 
-      {/* Other sections */}
       <About />
+      
+      <Experience />
+
       <Skills />
+      
+
       <Projects />
       <Certifications />
     </>

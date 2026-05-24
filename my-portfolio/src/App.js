@@ -15,12 +15,14 @@ import Resume from "./pages/Resume";
 // ✅ Import themes from your separate file
 import { lightTheme, darkTheme } from "./themes";
 
+// ✅ 1. IMPORT THE NEW CURSOR COMPONENT
+import CustomCursor from "./components/CustomCursor";
+
 // 🌐 Global styles
 const GlobalStyle = createGlobalStyle`
-  @keyframes moveGradient {
-    0% { background-position: 0% 0%; }
-    50% { background-position: 100% 100%; }
-    100% { background-position: 0% 0%; }
+  /* ✅ 2. ADD THIS BLOCK TO HIDE THE DEFAULT CURSOR */
+  * {
+    cursor: none !important;
   }
 
   body {
@@ -28,10 +30,9 @@ const GlobalStyle = createGlobalStyle`
     padding: 0;
     font-family: 'Poppins', sans-serif;
     background: ${(props) => props.theme.background};
-    background-size: ${(props) => props.theme.mode === "light" ? "400% 400%" : "auto"};
-    animation: ${(props) => props.theme.mode === "light" ? "moveGradient 15s ease infinite" : "none"};
     color: ${(props) => props.theme.textColor || props.theme.text};
     transition: all 0.5s ease-in-out;
+    scroll-behavior: smooth; 
   }
 `;
 
@@ -49,23 +50,20 @@ const ContentWrapper = styled.div`
 const Footer = styled.footer`
   background: ${(props) =>
     props.theme.mode === "light"
-      ? `linear-gradient(to right, rgba(239, 212, 144, 0.95), rgba(243, 178, 210, 0.95), rgba(189, 219, 243, 0.95))`
-      : "#595555ff"};
-  color: ${(props) => (props.theme.mode === "light" ? "#111" : "#eee")}; /* Darker for light mode */
+      ? `#ffffffff`
+      : "#59555ff"};
+  color: ${(props) => (props.theme.mode === "light" ? "#111" : "#eee")};
   text-align: center;
-  padding: 1rem 0.8rem; /* Increased vertical padding */
-  font-size: 1.5rem;  /* Larger font */
-  font-weight: 1000;   /* Bold text */
-  
+  padding: 1rem 0.8rem;
+  font-size: 0.8rem;
+  font-weight: 600; 
   backdrop-filter: blur(5px);
   border-top: 1px solid rgba(0, 0, 0, 0.1);
 `;
 
-
-
 const FooterText = styled.span`
-  color: #ffff};
-  font-weight: 600;
+  color: #e6eb54ff};
+  font-weight: 200;
 `;
 
 function App() {
@@ -74,7 +72,11 @@ function App() {
     return localStorage.getItem("theme") === "dark" ? darkTheme : lightTheme;
   });
 
-  const themeMode = useMemo(() => theme, [theme]);
+  /*
+   * We need 'theme.mode' (the string "light" or "dark")
+   * not 'theme' (the whole object)
+   */
+  const themeMode = useMemo(() => theme.mode, [theme]);
 
   const toggleTheme = () => {
     const newTheme = theme.mode === "light" ? darkTheme : lightTheme;
@@ -88,10 +90,16 @@ function App() {
   }, []);
 
   return (
-    <ThemeProvider theme={themeMode}>
+    <ThemeProvider theme={theme}> {/* Pass the full theme object here */}
       <GlobalStyle />
+      
+      {/* ✅ 3. ADD THE CUSTOM CURSOR COMPONENT HERE */}
+      <CustomCursor /> 
+
       <Container>
-        <Navbar toggleTheme={toggleTheme} />
+        {/* Pass the themeMode string ("light" or "dark") here */}
+        <Navbar toggleTheme={toggleTheme} themeMode={themeMode} />
+
         <ContentWrapper>
           <Routes>
             <Route path="/" element={<Home />} />
