@@ -1,11 +1,11 @@
 import React from "react";
 import { motion } from "framer-motion";
-import styled, { useTheme } from "styled-components";
+import styled from "styled-components";
 import {
                                                    FaReact, FaNodeJs, FaPython, FaJava, FaAws, FaDocker, FaLinux, FaGit, FaCode
 } from "react-icons/fa";
 import {
-                                                    SiMongodb, SiJavascript, SiCplusplus, SiCss3, SiMysql, SiPostgresql, SiKubernetes, SiOracle, SiHtml5, SiTailwindcss, SiSpring
+                                                    SiMongodb, SiJavascript, SiCplusplus, SiMysql, SiPostgresql, SiKubernetes, SiOracle, SiTailwindcss, SiSpring
 } from "react-icons/si";
 
 // Styled Components
@@ -104,7 +104,7 @@ const skillsData = {
 };
 
 const Skills = () => {
-                                                                                                                                                                                                                                                                    const theme = useTheme();
+                                                                                                                                    
 
                                                                                                                                     return (
                                                                                                                                          <Container>
