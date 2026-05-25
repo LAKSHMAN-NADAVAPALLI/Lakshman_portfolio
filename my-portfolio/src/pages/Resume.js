@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import resumePdf from "../assets/NadavapalliLakshman_RESUME.pdf";
+import resumePdf from "../assets/Lakshman_SDE_RESUME.pdf";
 
 const ResumeContainer = styled.div`
   max-width: 1000px;
