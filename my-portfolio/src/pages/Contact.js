@@ -1,135 +1,167 @@
 import React from "react";
-import { motion } from "framer-motion";
 import styled from "styled-components";
+import { motion } from "framer-motion";
+import { Github, Linkedin, Mail, Phone } from "lucide-react";
 
-const Container = styled.div`
-  padding: 60px 20px;
-  max-width: 800px;
-  margin: auto;
+const Container = styled.section`
+  padding: clamp(4rem, 8vw, 6rem) clamp(1.2rem, 5vw, 4rem);
+  background: ${(props) => props.theme.background};
+`;
+
+const Inner = styled.div`
+  width: min(900px, 100%);
+  margin: 0 auto;
   text-align: center;
 `;
 
+const SectionLabel = styled.p`
+  margin: 0 0 0.7rem;
+  color: ${(props) => props.theme.accent};
+  font-size: 0.9rem;
+  font-weight: 800;
+  text-transform: uppercase;
+`;
+
 const Title = styled.h1`
-  font-size: 3rem;
-  font-weight: bold;
-  margin-bottom: 20px;
-  color: ${(props) => props.theme.text};
+  margin: 0;
+  color: ${(props) => props.theme.textColor};
+  font-size: clamp(2rem, 4vw, 3rem);
+  line-height: 1.12;
+  font-weight: 900;
 `;
 
 const Subtitle = styled.p`
-  font-size: 1.2rem;
-  color: ${(props) => props.theme.accent};
-  margin-bottom: 40px;
+  max-width: 640px;
+  margin: 1rem auto 2rem;
+  color: ${(props) => props.theme.mutedText};
+  line-height: 1.75;
+  font-size: 1.04rem;
 `;
 
-const ContactCard = styled.div`
-  background: ${(props) => props.theme.skillCardBg};
-  padding: 30px;
-  border-radius: 16px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+const ContactGrid = styled.div`
   display: grid;
-  gap: 20px;
-  max-width: 500px;
-  margin: auto;
-`;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  text-align: left;
 
-const ContactItem = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  font-size: 1.1rem;
-  color: ${(props) => props.theme.text}; /* Ensures visible label text */
-
-  span {
-    color: ${(props) => props.theme.text};
+  @media (max-width: 680px) {
+    grid-template-columns: 1fr;
   }
 `;
 
 const ContactLink = styled.a`
-  color: ${(props) => props.theme.accent};
-  font-weight: bold;
+  display: flex;
+  gap: 0.9rem;
+  align-items: center;
+  min-height: 78px;
+  padding: 1rem;
+  border: 1px solid ${(props) => props.theme.border};
+  border-radius: 8px;
+  background: ${(props) => props.theme.surface};
+  color: ${(props) => props.theme.textColor};
   text-decoration: none;
-  transition: 0.3s ease;
+  transition: transform 0.2s ease, border-color 0.2s ease;
 
   &:hover {
-    text-decoration: underline;
-    opacity: 0.8;
+    transform: translateY(-3px);
+    border-color: ${(props) => props.theme.accent};
   }
 `;
 
-const MessageButton = styled.a`
-  display: inline-block;
-  margin-top: 30px;
-  padding: 14px 28px;
-  font-size: 1rem;
-  font-weight: bold;
-  color: #fff;
-  background: linear-gradient(135deg, #ff4d4d, #ff1a1a);
-  border-radius: 10px;
-  text-decoration: none;
-  box-shadow: 0 5px 15px rgba(255, 77, 77, 0.3);
-  transition: 0.3s ease;
+const IconBox = styled.span`
+  width: 42px;
+  height: 42px;
+  flex: 0 0 42px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  background: ${(props) => props.theme.accentSoft};
+  color: ${(props) => props.theme.accent};
+`;
 
-  &:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(255, 77, 77, 0.4);
-  }
+const Label = styled.span`
+  display: block;
+  color: ${(props) => props.theme.mutedText};
+  font-size: 0.86rem;
+  font-weight: 750;
+`;
+
+const Value = styled.span`
+  display: block;
+  margin-top: 0.22rem;
+  color: ${(props) => props.theme.textColor};
+  font-weight: 800;
+  overflow-wrap: anywhere;
 `;
 
 function Contact() {
   return (
     <Container>
-      <motion.div
-        initial={{ opacity: 0, y: 40 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8 }}
-      >
-        <Title>Contact Me</Title>
-        <Subtitle>Let's connect! Feel free to reach out via any platform below.</Subtitle>
-        
-        <ContactCard>
-          <ContactItem>
-            <span>📧 Email:</span>
+      <Inner>
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.45 }}
+        >
+          <SectionLabel>Contact</SectionLabel>
+          <Title>Open to software engineering opportunities.</Title>
+          <Subtitle>
+            I am actively looking for Software Engineer, Java Backend Developer, Full Stack
+            Developer, and Cloud Engineering roles.
+          </Subtitle>
+
+          <ContactGrid>
             <ContactLink href="mailto:2200030245cseh@gmail.com">
-              2200030245cseh@gmail.com
+              <IconBox>
+                <Mail size={19} />
+              </IconBox>
+              <span>
+                <Label>Email</Label>
+                <Value>2200030245cseh@gmail.com</Value>
+              </span>
             </ContactLink>
-          </ContactItem>
 
-          <ContactItem>
-            <span>🔗 LinkedIn:</span>
-            <ContactLink
-              href="https://www.linkedin.com/in/nadavapalli-venkata-pavan-sai-sri-lakshman-53366828a"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Nadavapalli Venkata Pavan Sai Sri Lakshman
+            <ContactLink href="tel:+919346716905">
+              <IconBox>
+                <Phone size={19} />
+              </IconBox>
+              <span>
+                <Label>Phone</Label>
+                <Value>+91 93467 16905</Value>
+              </span>
             </ContactLink>
-          </ContactItem>
 
-          <ContactItem>
-            <span>🐙 GitHub:</span>
             <ContactLink
               href="https://github.com/LAKSHMAN-NADAVAPALLI"
               target="_blank"
               rel="noopener noreferrer"
             >
-              github.com/LAKSHMAN-NADAVAPALLI
+              <IconBox>
+                <Github size={19} />
+              </IconBox>
+              <span>
+                <Label>GitHub</Label>
+                <Value>github.com/LAKSHMAN-NADAVAPALLI</Value>
+              </span>
             </ContactLink>
-          </ContactItem>
 
-          <ContactItem>
-            <span>📞 Phone:</span>
-            <ContactLink href="tel:+919346716905">
-              +91 93467 16905
+            <ContactLink
+              href="https://www.linkedin.com/in/nadavapalli-venkata-pavan-sai-sri-lakshman-53366828a"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <IconBox>
+                <Linkedin size={19} />
+              </IconBox>
+              <span>
+                <Label>LinkedIn</Label>
+                <Value>Nadavapalli Lakshman</Value>
+              </span>
             </ContactLink>
-          </ContactItem>
-        </ContactCard>
-
-        <MessageButton href="mailto:2200030245cseh@gmail.com">
-          📩 Send a Message
-        </MessageButton>
-      </motion.div>
+          </ContactGrid>
+        </motion.div>
+      </Inner>
     </Container>
   );
 }

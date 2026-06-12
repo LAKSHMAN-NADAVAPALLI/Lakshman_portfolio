@@ -1,141 +1,170 @@
 import React from "react";
-import { motion } from "framer-motion";
 import styled from "styled-components";
-import {
-                                                   FaReact, FaNodeJs, FaPython, FaJava, FaAws, FaDocker, FaLinux, FaGit, FaCode
-} from "react-icons/fa";
-import {
-                                                    SiMongodb, SiJavascript, SiCplusplus, SiMysql, SiPostgresql, SiKubernetes, SiOracle, SiTailwindcss, SiSpring
-} from "react-icons/si";
+import { motion } from "framer-motion";
+import { Code2, Cloud, Database, Server, Settings, TestTube2 } from "lucide-react";
 
-// Styled Components
-const Container = styled.div`
-                                                     padding: 80px 20px;
-                                                      text-align: center;
-                                                       max-width: 1100px;
-                                                        margin: auto;
+const Container = styled.section`
+  padding: clamp(4rem, 8vw, 6rem) clamp(1.2rem, 5vw, 4rem);
+  background: ${(props) => props.theme.background};
+`;
+
+const Inner = styled.div`
+  width: min(1120px, 100%);
+  margin: 0 auto;
+`;
+
+const Header = styled.div`
+  max-width: 760px;
+  margin-bottom: 2.5rem;
+`;
+
+const SectionLabel = styled.p`
+  margin: 0 0 0.7rem;
+  color: ${(props) => props.theme.accent};
+  font-size: 0.9rem;
+  font-weight: 800;
+  text-transform: uppercase;
 `;
 
 const Title = styled.h1`
-                                                         font-size: 3rem;
-                                                          font-weight: bold;
-                                                           margin-bottom: 40px;
-                                                            color: ${(props) => props.theme.textColor}; 
+  margin: 0;
+  color: ${(props) => props.theme.textColor};
+  font-size: clamp(2rem, 4vw, 3rem);
+  line-height: 1.12;
+  font-weight: 900;
 `;
 
-const CategoryTitle = styled.h2`
-                                                             font-size: 2rem;
-                                                              margin: 40px 0 20px;
-                                                               color: ${(props) => props.theme.textColor}; 
-                                                                border-bottom: 2px solid ${(props) => props.theme.accent}30;
-                                                                 padding-bottom: 10px;
+const Subtitle = styled.p`
+  margin: 1rem 0 0;
+  color: ${(props) => props.theme.mutedText};
+  font-size: 1.04rem;
+  line-height: 1.75;
 `;
 
 const SkillsGrid = styled.div`
-                                                                   display: flex;
-                                                                    flex-wrap: wrap;
-                                                                     justify-content: center;
-                                                                      gap: 20px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+
+  @media (max-width: 920px) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  @media (max-width: 620px) {
+    grid-template-columns: 1fr;
+  }
 `;
 
-const SkillCard = styled(motion.div)`
-                                                                       padding: 20px 10px;
-                                                                        background-color: ${(props) => props.theme.skillCardBg};
-                                                                         color: ${(props) => props.theme.skillTextColor};
-                                                                          border-radius: 12px;
-                                                                           width: 140px; /* Slightly smaller cards */
-                                                                            height: 140px;
-                                                                             display: flex;
-                                                                               flex-direction: column;
-                                                                                align-items: center;
-                                                                                 justify-content: center;
-                                                                                  gap: 10px;
-                                                                                   font-weight: 500;
-                                                                                    font-size: 0.9rem;
-                                                                                     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-                                                                                      transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
-                                                                                       cursor: pointer;
-                                                                                        border: 1px solid ${(props) => props.theme.skillCardBg}; /* Soft border */
-
-                                                                                         &:hover {
-                                                                                                                  transform: scale(1.08) translateY(-5px);
-                                                                                                                    box-shadow: 0 8px 20px ${(props) => props.theme.accent}30;
-                                                                                                                      background-color: ${(props) => props.theme.hoverBgColor};
-                                                                                                                        color: ${(props) => props.theme.hoverTextColor};
-                                                                                              }
-
-                                                                                               svg {
-                                                                                                                            // Use the accent color for icons in dark mode for a unified look
-                                                                                                                              color: ${(props) => props.theme.mode === 'dark' ? props.theme.accent : props.theme.hoverTextColor} !important;
-                                                                                                                                transition: color 0.3s ease;
-                                                                                                   }
+const SkillGroup = styled(motion.article)`
+  min-height: 230px;
+  padding: 1.35rem;
+  border: 1px solid ${(props) => props.theme.border};
+  border-radius: 8px;
+  background: ${(props) => props.theme.surface};
+  box-shadow: ${(props) => props.theme.cardShadow};
 `;
 
-const skillsData = {
-                                                                                                     // 🌟 NEW TOP-PRIORITY CATEGORY FOR PLACEMENTS 🌟
-                                                                                                       "Core Engineering ": [ 
-                                                                                                                                       { name: "DSA & Algorithms", icon: <FaCode size={30} /> },
-                                                                                                                                         { name: "System Design (LLD/HLD)", icon: <FaAws size={30} /> },
-                                                                                                                                           { name: "Core Java", icon: <FaJava size={30} /> },
-                                                                                                                                             { name: "SQL & Relational DBs", icon: <SiMysql size={30} /> },
-                                                                                                                                               { name: "Aptitude & Reasoning", icon: <FaCode size={30} /> },
-                                                                                                            ],
-                                                                                                             "Full Stack & Frameworks": [
-                                                                                                                                                  { name: "React", icon: <FaReact size={30} /> },
-                                                                                                                                                    { name: "Node.js (Express)", icon: <FaNodeJs size={30} /> },
-                                                                                                                                                      { name: "Spring Boot", icon: <SiSpring size={30} /> },
-                                                                                                                                                        { name: "Python", icon: <FaPython size={30} /> }, 
-                                                                                                                                                          { name: "Tailwind CSS", icon: <SiTailwindcss size={30} /> }
-                                                                                                                   ],
-                                                                                                                    "Cloud & DevOps": [
-                                                                                                                                                              { name: "AWS", icon: <FaAws size={30} /> },
-                                                                                                                                                                { name: "OCI", icon: <SiOracle size={30} /> }, 
-                                                                                                                                                                  { name: "Docker", icon: <FaDocker size={30} /> },
-                                                                                                                                                                    { name: "Kubernetes", icon: <SiKubernetes size={30} /> },
-                                                                                                                                                                      { name: "Git & GitHub Actions", icon: <FaGit size={30} /> },
-                                                                                                                          ],
-                                                                                                                           "Databases & Tools": [
-                                                                                                                                                                          { name: "MongoDB", icon: <SiMongodb size={30} /> },
-                                                                                                                             { name: "PostgreSQL", icon: <SiPostgresql size={30} /> },
-                                                                                                                               { name: "C++", icon: <SiCplusplus size={30} /> }, 
-                                                                                                                                 { name: "Linux", icon: <FaLinux size={30} /> },
-                                                                                                                                   { name: "JavaScript (ES6+)", icon: <SiJavascript size={30} /> }
-                                                                                                                                 ]
-};
+const IconWrap = styled.div`
+  width: 42px;
+  height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  background: ${(props) => props.theme.accentSoft};
+  color: ${(props) => props.theme.accent};
+  margin-bottom: 1rem;
+`;
+
+const GroupTitle = styled.h2`
+  margin: 0 0 0.9rem;
+  color: ${(props) => props.theme.textColor};
+  font-size: 1.08rem;
+`;
+
+const Tags = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+`;
+
+const Tag = styled.span`
+  padding: 0.42rem 0.6rem;
+  border-radius: 999px;
+  background: ${(props) => props.theme.surfaceSoft};
+  color: ${(props) => props.theme.mutedText};
+  font-size: 0.88rem;
+  font-weight: 650;
+`;
+
+const skillGroups = [
+  {
+    title: "Backend Engineering",
+    icon: <Server size={21} />,
+    skills: ["Java", "Spring Boot", "Node.js", "Express.js", "REST APIs", "Authentication"],
+  },
+  {
+    title: "Frontend Development",
+    icon: <Code2 size={21} />,
+    skills: ["React", "JavaScript", "HTML", "CSS", "Styled Components", "Tailwind CSS"],
+  },
+  {
+    title: "Databases",
+    icon: <Database size={21} />,
+    skills: ["MySQL", "MongoDB", "PostgreSQL", "SQL", "Query Optimization", "Data Modeling"],
+  },
+  {
+    title: "Cloud and DevOps",
+    icon: <Cloud size={21} />,
+    skills: ["AWS", "Oracle Cloud", "Docker", "GitHub Actions", "Linux", "Deployment"],
+  },
+  {
+    title: "Computer Science Core",
+    icon: <TestTube2 size={21} />,
+    skills: ["DSA", "OOP", "DBMS", "Operating Systems", "Networking", "System Design Basics"],
+  },
+  {
+    title: "Tools and Workflow",
+    icon: <Settings size={21} />,
+    skills: ["Git", "GitHub", "Postman", "VS Code", "Agile Basics", "Debugging"],
+  },
+];
 
 const Skills = () => {
-                                                                                                                                    
+  return (
+    <Container>
+      <Inner>
+        <Header>
+          <SectionLabel>Skills</SectionLabel>
+          <Title>Engineering skills I use to build, debug, and ship complete applications.</Title>
+          <Subtitle>
+            The stack is grouped by how I work: backend logic, user interfaces, data, cloud,
+            fundamentals, and the tools that keep projects maintainable.
+          </Subtitle>
+        </Header>
 
-                                                                                                                                    return (
-                                                                                                                                         <Container>
-                                                                                                                                                                                          <motion.div
-                     initial={{ opacity: 0, scale: 0.9 }}
-                       animate={{ opacity: 1, scale: 1 }}
-                        transition={{ duration: 0.6 }}
-                                                                                                                                                                                             >
-                         <Title>Technical Skills</Title>
-                          {Object.entries(skillsData).map(([category, skills], index) => (
-                                  <div key={category}>
-                                                                                     <CategoryTitle>{category}</CategoryTitle>
-                                                                                         <SkillsGrid>
-                                                                                                                                                    {skills.map((skill, idx) => (
-                                                               <SkillCard
-                                                                              key={idx}
-                initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                         transition={{ delay: idx * 0.05 + index * 0.2 }}
-                              whileHover={{ scale: 1.05, y: -5 }}
-                   >
-                                        {skill.icon}
-                                            {skill.name}
-                               </SkillCard>
-                                                                                                                                                 ))}
-                                                                                           </SkillsGrid>
-                                       </div>
-                    ))}
-                                                                                                                            </motion.div>
-                                                                       </Container>
-                                                  );
+        <SkillsGrid>
+          {skillGroups.map((group, index) => (
+            <SkillGroup
+              key={group.title}
+              initial={{ opacity: 0, y: 22 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.45, delay: index * 0.05 }}
+            >
+              <IconWrap>{group.icon}</IconWrap>
+              <GroupTitle>{group.title}</GroupTitle>
+              <Tags>
+                {group.skills.map((skill) => (
+                  <Tag key={skill}>{skill}</Tag>
+                ))}
+              </Tags>
+            </SkillGroup>
+          ))}
+        </SkillsGrid>
+      </Inner>
+    </Container>
+  );
 };
 
 export default Skills;

@@ -1,52 +1,45 @@
-
-
-
 export const lightTheme = {
   mode: "light",
-  
-  // High-energy "Grok" Mesh Gradient
-  // This uses multiple layering and background-size to allow for animation
-  background: `
-  linear-gradient(120deg, rgba(242, 255, 0, 0.85) 0%, rgba(247, 246, 237, 0.75) 40%, rgba(255, 255, 255, 0.65) 100%),
-  radial-gradient(circle at 15% 25%, rgb(255, 255, 255) 0%, transparent 45%),
-  radial-gradient(circle at 85% 75%, rgba(246, 255, 0, 0.9) 0%, transparent 45%),
-  radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.6) 0%, transparent 30%)
-`,
-backgroundSize: "250% 250%",
-animation: "gradientMove 4s linear infinite",
-  // Refined Glassmorphism for Nav
-  navBackground: "rgba(255, 255, 255, 0.7)", 
-  navBlur: "blur(12px) saturate(180%)", // The "Modern Rich" secret sauce
-  
-  // Contrast & Typography
-  textColor: "#0F172A", // Deep Slate for better readability than pure black
-  buttonBg: "#1E293B", // Sophisticated dark charcoal (pairs better with yellow-green)
+  background: "#F7F8FA",
+  surface: "#FFFFFF",
+  surfaceSoft: "#EEF2F6",
+  border: "#DDE3EA",
+  navBackground: "rgba(255, 255, 255, 0.88)",
+  navBlur: "blur(16px) saturate(180%)",
+  textColor: "#111827",
+  text: "#111827",
+  mutedText: "#5B6472",
+  buttonBg: "#1F6FEB",
+  buttonText: "#FFFFFF",
   buttonTextColor: "#FFFFFF",
-  
-  // Highlights
-  accent: "#2979FF", 
-  skillCardBg: "rgba(255, 255, 255, 0.5)", // Semi-transparent for glass effect
-  skillTextColor: "#1E293B",
-  
-  // Interaction
-  hoverBgColor: "rgba(255, 255, 255, 0.8)",
-  hoverTextColor: "#000000",
-  cardShadow: "0 8px 32px 0 rgba(31, 38, 135, 0.07)", // Soft professional depth
+  accent: "#1F6FEB",
+  accentSoft: "rgba(31, 111, 235, 0.1)",
+  skillCardBg: "#FFFFFF",
+  skillTextColor: "#111827",
+  hoverBgColor: "#EEF5FF",
+  hoverTextColor: "#1F6FEB",
+  cardShadow: "0 18px 45px rgba(15, 23, 42, 0.08)",
 };
 
 export const darkTheme = {
   mode: "dark",
-  // Deep, subtle background
-  background: "#0e0e1a",
-  navBackground: "rgba(14, 14, 26, 0.85)", // Deep navy/charcoal translucent nav
-  textColor: "#EBEBEB", // Soft white for main text
-  text: "#EBEBEB", // Fallback for general text
-  buttonBg: "#00FFFF", // Electric accent color for CTA/buttons
-  buttonText: "#0e0e1a", // Deep background color for high-contrast button text
-  accent: "#00FFFF", // The electric Teal/Cyan highlight
-  skillCardBg: "#1C1B22", // Dark card background for depth
-  skillTextColor: "#EBEBEB",
-  hoverBgColor: "#2A2A3E", // Subtle dark elevation on hover
-  hoverTextColor: "#00FFFF", // Neon text on hover
+  background: "#0B1020",
+  surface: "#121A2C",
+  surfaceSoft: "#172033",
+  border: "#263247",
+  navBackground: "rgba(11, 16, 32, 0.9)",
+  navBlur: "blur(16px) saturate(180%)",
+  textColor: "#F8FAFC",
+  text: "#F8FAFC",
+  mutedText: "#A8B3C7",
+  buttonBg: "#58A6FF",
+  buttonText: "#08111F",
+  buttonTextColor: "#08111F",
+  accent: "#58A6FF",
+  accentSoft: "rgba(88, 166, 255, 0.13)",
+  skillCardBg: "#121A2C",
+  skillTextColor: "#F8FAFC",
+  hoverBgColor: "#172A46",
+  hoverTextColor: "#58A6FF",
+  cardShadow: "0 18px 45px rgba(0, 0, 0, 0.28)",
 };
-

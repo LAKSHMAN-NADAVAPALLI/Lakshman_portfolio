@@ -1,162 +1,178 @@
 import React from "react";
 import styled from "styled-components";
 import { motion } from "framer-motion";
-import { FaExternalLinkAlt } from "react-icons/fa";
+import { ArrowUpRight } from "lucide-react";
 
-import cImg from "../assets/image1.png";
-import cImgR from "../assets/image2.png";
-import cImgO from "../assets/image3.png";
+import awsImg from "../assets/image1.png";
+import redHatImg from "../assets/image2.png";
+import oracleImg from "../assets/image3.png";
 
-const Container = styled.div`
-  padding: 50px;
-  text-align: center;
-  max-width: 1100px;
-  margin: auto;
+const Container = styled.section`
+  padding: clamp(4rem, 8vw, 6rem) clamp(1.2rem, 5vw, 4rem);
+  background: ${(props) => props.theme.surface};
+  border-top: 1px solid ${(props) => props.theme.border};
+`;
+
+const Inner = styled.div`
+  width: min(1120px, 100%);
+  margin: 0 auto;
+`;
+
+const Header = styled.div`
+  max-width: 760px;
+  margin-bottom: 2.5rem;
+`;
+
+const SectionLabel = styled.p`
+  margin: 0 0 0.7rem;
+  color: ${(props) => props.theme.accent};
+  font-size: 0.9rem;
+  font-weight: 800;
+  text-transform: uppercase;
 `;
 
 const Title = styled.h1`
-  font-size: 2.5rem;
-  font-weight: bold;
-  margin-bottom: 30px;
-  color: ${(props) => props.theme.skillTextColor};
+  margin: 0;
+  color: ${(props) => props.theme.textColor};
+  font-size: clamp(2rem, 4vw, 3rem);
+  line-height: 1.12;
+  font-weight: 900;
 `;
 
-const CertificationList = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 25px;
+const Subtitle = styled.p`
+  margin: 1rem 0 0;
+  color: ${(props) => props.theme.mutedText};
+  line-height: 1.75;
+  font-size: 1.04rem;
+`;
+
+const Grid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+
+  @media (max-width: 920px) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  @media (max-width: 640px) {
+    grid-template-columns: 1fr;
+  }
 `;
 
 const Card = styled(motion.a)`
-  background: ${(props) => props.theme.skillCardBg};
-  color: ${(props) => props.theme.skillTextColor};
-  width: 300px;
-  padding: 20px;
-  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  padding: 1.25rem;
+  border: 1px solid ${(props) => props.theme.border};
+  border-radius: 8px;
+  background: ${(props) => props.theme.background};
+  color: ${(props) => props.theme.textColor};
   text-decoration: none;
-  box-shadow: 0px 6px 14px rgba(0, 0, 0, 0.12);
-  cursor: pointer;
+  transition: transform 0.2s ease, border-color 0.2s ease;
 
   &:hover {
-    transform: scale(1.05) translateY(-8px);
-    box-shadow: 0px 12px 24px rgba(0, 0, 0, 0.2);
-    background-color: ${(props) => props.theme.hoverBgColor};
-    color: ${(props) => props.theme.hoverTextColor};
+    transform: translateY(-4px);
+    border-color: ${(props) => props.theme.accent};
   }
 `;
 
-const ImageWrapper = styled.div`
+const BadgeImage = styled.img`
   width: 100%;
-  height: 180px;
-  overflow: hidden;
-  border-radius: 10px;
-
-  img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-  }
-`;
-
-const CardContent = styled.div`
-  text-align: center;
-  margin-top: 15px;
+  height: 150px;
+  object-fit: contain;
+  border-radius: 8px;
+  background: ${(props) => props.theme.surface};
+  border: 1px solid ${(props) => props.theme.border};
+  padding: 0.7rem;
+  margin-bottom: 1rem;
 `;
 
 const CertTitle = styled.h2`
-  font-size: 1.1rem;
-  font-weight: bold;
+  margin: 0;
+  color: ${(props) => props.theme.textColor};
+  font-size: 1.05rem;
+  line-height: 1.4;
 `;
 
 const Description = styled.p`
-  font-size: 0.9rem;
-  margin-top: 5px;
-  color: ${(props) => props.theme.skillTextColor};
+  margin: 0.7rem 0 0;
+  color: ${(props) => props.theme.mutedText};
+  line-height: 1.65;
+  font-size: 0.94rem;
 `;
 
-const EarnedDate = styled.p`
-  font-size: 0.85rem;
-  margin-top: 5px;
-  font-weight: bold;
-  color: ${(props) => props.theme.skillTextColor};
-`;
-
-const ViewButton = styled.div`
-  margin-top: 10px;
+const Meta = styled.span`
+  margin-top: auto;
+  padding-top: 1rem;
   display: inline-flex;
-  justify-content: center;
   align-items: center;
-  background-color: ${(props) => props.theme.buttonBg};
-  color: ${(props) => props.theme.buttonTextColor};
-  padding: 8px 12px;
-  border-radius: 6px;
-  font-weight: bold;
-
-  svg {
-    margin-left: 6px;
-  }
+  gap: 0.4rem;
+  color: ${(props) => props.theme.accent};
+  font-weight: 800;
+  font-size: 0.88rem;
 `;
 
 const certifications = [
   {
     name: "Oracle Cloud Infrastructure 2024 Generative AI Certified Professional",
-    description: "Validated Oracle Generative AI skills and infrastructure fundamentals.",
-    earned: "5 July 2024",
+    description: "Validated Oracle Generative AI services and cloud infrastructure fundamentals.",
+    earned: "Earned July 5, 2024",
     link: "https://catalog-education.oracle.com/ords/certview/sharebadge?id=37B3018A28F26088FC2C6908E504EECD620F7FE70241DA3F2A9AD509618BA44C",
-    image: cImgO,
+    image: oracleImg,
   },
   {
     name: "AWS Certified Cloud Practitioner",
-    description: "Validated AWS cloud services, pricing, and architecture fundamentals.",
-    earned: "31 July 2024",
+    description: "Validated AWS cloud services, pricing, security, and architecture fundamentals.",
+    earned: "Earned July 31, 2024",
     link: "https://www.credly.com/badges/32387a49-c0e6-469a-973d-ba90f38aa031/public_url",
-    image: cImg,
+    image: awsImg,
   },
   {
     name: "Red Hat Certified Enterprise Application Developer",
-    description: "Proficient in Red Hat Java enterprise application development.",
-    earned: "18 September 2024",
+    description: "Validated Java enterprise application development using Red Hat technologies.",
+    earned: "Earned September 18, 2024",
     link: "https://www.credly.com/badges/9c686d86-d5c7-429b-9f4c-736b12ea40ea/public_url",
-    image: cImgR,
+    image: redHatImg,
   },
 ];
 
 const Certifications = () => {
   return (
     <Container>
-      <motion.div
-        initial={{ opacity: 0, scale: 0.9 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.6 }}
-      >
-        <Title>Certifications</Title>
-        <CertificationList>
+      <Inner>
+        <Header>
+          <SectionLabel>Certifications</SectionLabel>
+          <Title>Credentials that support my cloud and enterprise development foundation.</Title>
+          <Subtitle>
+            These certifications show verified exposure to
+            cloud services, enterprise Java, and AI infrastructure.
+          </Subtitle>
+        </Header>
+
+        <Grid>
           {certifications.map((cert, index) => (
             <Card
-              key={index}
+              key={cert.name}
               href={cert.link}
               target="_blank"
               rel="noopener noreferrer"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.1 }}
+              initial={{ opacity: 0, y: 22 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.45, delay: index * 0.06 }}
             >
-              <ImageWrapper>
-                <img src={cert.image} alt={cert.name} />
-              </ImageWrapper>
-              <CardContent>
-                <CertTitle>{cert.name}</CertTitle>
-                <Description>{cert.description}</Description>
-                <EarnedDate>Earned: {cert.earned}</EarnedDate>
-                <ViewButton>
-                  View Credential <FaExternalLinkAlt />
-                </ViewButton>
-              </CardContent>
+              <BadgeImage src={cert.image} alt={cert.name} />
+              <CertTitle>{cert.name}</CertTitle>
+              <Description>{cert.description}</Description>
+              <Meta>
+                {cert.earned} <ArrowUpRight size={15} />
+              </Meta>
             </Card>
           ))}
-        </CertificationList>
-      </motion.div>
+        </Grid>
+      </Inner>
     </Container>
   );
 };

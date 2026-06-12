@@ -1,234 +1,291 @@
 import React from "react";
 import styled from "styled-components";
 import { motion } from "framer-motion";
+import { BookOpen, Code2, Database, ShieldCheck } from "lucide-react";
 
-/* ---------- Layout ---------- */
+const Container = styled.section`
+  padding: clamp(4rem, 8vw, 6rem) clamp(1.2rem, 5vw, 4rem);
+  background: ${(props) => props.theme.surface};
+  border-block: 1px solid ${(props) => props.theme.border};
+`;
 
-const Container = styled.div`
-  padding: 80px 20px;
-  max-width: 1100px;
-  margin: auto;
-  overflow: hidden;
+const Inner = styled.div`
+  width: min(1120px, 100%);
+  margin: 0 auto;
+`;
+
+const Header = styled.div`
+  max-width: 760px;
+  margin-bottom: 2.5rem;
+`;
+
+const SectionLabel = styled.p`
+  margin: 0 0 0.7rem;
+  color: ${(props) => props.theme.accent};
+  font-size: 0.9rem;
+  font-weight: 800;
+  text-transform: uppercase;
 `;
 
 const Title = styled.h1`
-  text-align: center;
-  font-size: 2.8rem;
-  margin-bottom: 20px;
+  margin: 0;
   color: ${(props) => props.theme.textColor};
-  font-weight: 800;
-  letter-spacing: -1px;
+  font-size: clamp(2rem, 4vw, 3rem);
+  line-height: 1.12;
+  font-weight: 900;
 `;
 
 const Subtitle = styled.p`
-  text-align: center;
-  max-width: 700px;
-  margin: 0 auto 60px;
-  color: ${(props) => props.theme.textColor};
-  opacity: 0.7;
-  line-height: 1.7;
-  font-size: 1rem;
+  margin: 1rem 0 0;
+  color: ${(props) => props.theme.mutedText};
+  line-height: 1.75;
+  font-size: 1.04rem;
 `;
 
-/* ---------- Timeline ---------- */
-
-const TimelineContainer = styled.div`
+const Timeline = styled.div`
   position: relative;
-  margin: 40px 0;
-  display: flex;
-  flex-direction: column;
-`;
+  display: grid;
+  gap: 1rem;
 
-const CenterLine = styled.div`
-  position: absolute;
-  width: 4px;
-  background: ${(props) => props.theme.accent};
-  box-shadow: 0 0 15px ${(props) => props.theme.accent}66;
-  top: 0;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  opacity: 0.35;
+  &::before {
+    content: "";
+    position: absolute;
+    top: 1rem;
+    bottom: 1rem;
+    left: 23px;
+    width: 1px;
+    background: ${(props) => props.theme.border};
 
-  @media (max-width: 768px) {
-    left: 20px;
+    @media (max-width: 720px) {
+      display: none;
+    }
   }
 `;
 
-const Item = styled(motion.div)`
+const Card = styled(motion.article)`
   position: relative;
-  width: 100%;
-  margin-bottom: 60px;
-  display: flex;
-  justify-content: ${(props) => (props.left ? "flex-start" : "flex-end")};
+  display: grid;
+  grid-template-columns: 48px minmax(150px, 190px) 1fr;
+  gap: 1.15rem;
+  padding: 1.25rem;
+  border: 1px solid ${(props) => props.theme.border};
+  border-radius: 8px;
+  background: ${(props) => props.theme.background};
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
 
-  @media (max-width: 768px) {
-    justify-content: flex-start;
-    padding-left: 50px;
+  &:hover {
+    transform: translateY(-3px);
+    border-color: ${(props) => props.theme.accent};
+    box-shadow: ${(props) => props.theme.cardShadow};
+  }
+
+  @media (max-width: 720px) {
+    grid-template-columns: 42px 1fr;
   }
 `;
 
-const Dot = styled(motion.div)`
-  position: absolute;
-  width: 18px;
-  height: 18px;
-  background: ${(props) => props.theme.accent};
-  border: 4px solid ${(props) => props.theme.skillCardBg};
-  border-radius: 50%;
-  z-index: 10;
-  box-shadow: 0 0 12px ${(props) => props.theme.accent};
+const IconBox = styled.div`
+  position: relative;
+  z-index: 1;
+  width: 48px;
+  height: 48px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  border: 1px solid ${(props) => props.theme.border};
+  background: ${(props) => props.theme.surface};
+  color: ${(props) => props.theme.accent};
 
-  left: 50%;
-  top: 30px;
-  transform: translateX(-50%);
-
-  @media (max-width: 768px) {
-    left: 20px;
+  @media (max-width: 720px) {
+    width: 42px;
+    height: 42px;
   }
 `;
 
-const Card = styled(motion.div)`
-  background: linear-gradient(
-    135deg,
-    ${(props) => props.theme.skillCardBg},
-    rgba(255, 255, 255, 0.04)
-  );
+const Meta = styled.div`
+  @media (max-width: 720px) {
+    grid-column: 2;
+  }
+`;
 
-  padding: 24px;
-  border-radius: 22px;
-  box-shadow: ${(props) => props.theme.cardShadow};
-  backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  width: 42%;
-  text-align: left;
-  transition: all 0.3s ease;
+const Duration = styled.span`
+  display: inline-flex;
+  width: fit-content;
+  padding: 0.42rem 0.65rem;
+  border-radius: 999px;
+  background: ${(props) => props.theme.accentSoft};
+  color: ${(props) => props.theme.accent};
+  font-size: 0.82rem;
+  font-weight: 800;
+`;
 
-  @media (max-width: 768px) {
-    width: 100%;
-    max-width: 500px;
+const Company = styled.p`
+  margin: 0.7rem 0 0;
+  color: ${(props) => props.theme.mutedText};
+  font-size: 0.94rem;
+  line-height: 1.55;
+`;
+
+const Content = styled.div`
+  @media (max-width: 720px) {
+    grid-column: 1 / -1;
   }
 `;
 
 const Role = styled.h2`
-  font-size: 1.35rem;
+  margin: 0;
   color: ${(props) => props.theme.textColor};
-  margin-bottom: 4px;
-  font-weight: 700;
-`;
-
-const Company = styled.h3`
-  font-size: 1.05rem;
-  font-weight: 600;
-  color: ${(props) => props.theme.accent};
-  margin-bottom: 10px;
-`;
-
-const Duration = styled.span`
-  font-size: 0.85rem;
-  background: rgba(0, 0, 0, 0.06);
-  padding: 5px 14px;
-  border-radius: 20px;
-  display: inline-block;
-  margin-bottom: 14px;
-  font-weight: 600;
+  font-size: 1.18rem;
 `;
 
 const Description = styled.p`
-  font-size: 0.98rem;
-  line-height: 1.8;
-  color: ${(props) => props.theme.textColor};
-  opacity: 0.82;
+  margin: 0.55rem 0 0;
+  color: ${(props) => props.theme.mutedText};
+  line-height: 1.72;
 `;
 
-/* ---------- Experience Data ---------- */
+const ProofList = styled.ul`
+  margin: 0.9rem 0 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 0.45rem;
+`;
+
+const ProofItem = styled.li`
+  color: ${(props) => props.theme.textColor};
+  font-size: 0.94rem;
+  line-height: 1.55;
+
+  &::before {
+    content: "";
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    margin-right: 0.55rem;
+    border-radius: 50%;
+    background: ${(props) => props.theme.accent};
+    vertical-align: 0.12rem;
+  }
+`;
+
+const Tags = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  margin-top: 1rem;
+`;
+
+const Tag = styled.span`
+  padding: 0.35rem 0.52rem;
+  border-radius: 999px;
+  background: ${(props) => props.theme.surfaceSoft};
+  color: ${(props) => props.theme.mutedText};
+  font-size: 0.78rem;
+  font-weight: 750;
+`;
 
 const experiences = [
   {
-    role: "Software Engineering ",
-    company: "KL University",
-    duration: "2025 – Present",
+    role: "Software Engineering Foundation",
+    company: "K.L. University",
+    duration: "2022 - 2026",
+    icon: <BookOpen size={20} />,
     description:
-      "Actively preparing for Software Engineer roles by solving Data Structures & Algorithms problems, practicing Core Java and SQL, and participating in mock technical interviews focused on product-based company hiring patterns.",
+      "Completed B.Tech CSE with a strong base in core computer science and application development.",
+    proof: [
+      "Built foundations in DSA, OOP, DBMS, operating systems, networking, and SQL.",
+      "Applied classroom concepts through backend, database, and full-stack project work.",
+    ],
+    tools: ["Java", "DSA", "SQL", "OOP", "DBMS"],
   },
   {
     role: "Full Stack Developer",
-    company: "CyberShield AI – Real-Time Threat Detection Platform",
-    duration: "2024 – Present",
+    company: "CyberShield AI - Real-Time Threat Detection Platform",
+    duration: "2024 - 2025",
+    icon: <ShieldCheck size={20} />,
     description:
-      "Designed and developed a real-time cybersecurity monitoring platform using MERN stack technologies with secure authentication, live threat analysis dashboards, and scalable backend APIs for efficient threat detection workflows.",
+      "Designed and developed a security-focused platform for analyzing logs and presenting threat insights.",
+    proof: [
+      "Connected React dashboards with backend services for threat analysis workflows.",
+      "Worked across authentication, API design, MongoDB storage, and model-inference integration.",
+    ],
+    tools: ["React", "Spring Boot", "Flask", "MongoDB", "APIs"],
   },
   {
-    role: "Backend & Database Developer",
+    role: "Backend and Database Developer",
     company: "Academic and Personal Projects",
-    duration: "2023 – 2024",
+    duration: "2023 - 2024",
+    icon: <Database size={20} />,
     description:
-      "Built backend systems using Java, Spring Boot, SQL, and REST APIs while optimizing database queries and implementing scalable application logic for real-time web applications and university projects.",
+      "Built data-backed applications with emphasis on clean business logic and reliable persistence.",
+    proof: [
+      "Implemented REST APIs, SQL flows, authentication logic, and transaction-oriented features.",
+      "Improved project structure through reusable modules, clear data models, and practical debugging.",
+    ],
+    tools: ["Java", "Spring Boot", "Node.js", "MySQL", "MongoDB"],
+  },
+  {
+    role: "Interview and Product Engineering Practice",
+    company: "Independent preparation",
+    duration: "2025 - 2026",
+    icon: <Code2 size={20} />,
+    description:
+      "Practiced technical problem solving and refined projects to match real software engineering expectations.",
+    proof: [
+      "Focused on DSA patterns, Java fundamentals, SQL, system design basics, and code readability.",
+      "Converted project descriptions into evidence: architecture, stack choices, deployments, and links.",
+    ],
+    tools: ["DSA", "Java", "System Design", "GitHub", "Deployment"],
   },
 ];
-
-/* ---------- Component ---------- */
 
 const Experience = () => {
   return (
     <Container id="experience">
-      <Title>Professional Journey</Title>
+      <Inner>
+        <Header>
+          <SectionLabel>Journey</SectionLabel>
+          <Title>How my engineering skills developed through study, projects, and practice.</Title>
+          <Subtitle>
+            This section shows my progression clearly: fundamentals first, then full-stack
+            execution, database-backed systems, and interview-focused engineering.
+          </Subtitle>
+        </Header>
 
-      <Subtitle>
-        My journey in software development, backend engineering,
-        cloud technologies, and technical interview preparation.
-      </Subtitle>
-
-      <TimelineContainer>
-        <CenterLine />
-
-        {experiences.map((exp, index) => {
-          const isLeft = index % 2 === 0;
-
-          return (
-            <Item
-              key={index}
-              left={isLeft}
-              initial={{ opacity: 0, y: 50 }}
+        <Timeline>
+          {experiences.map((exp, index) => (
+            <Card
+              key={exp.role}
+              initial={{ opacity: 0, y: 22 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.2 }}
-              transition={{
-                duration: 0.6,
-                delay: index * 0.1,
-              }}
+              transition={{ duration: 0.45, delay: index * 0.06 }}
             >
-              <Dot
-                initial={{ scale: 0 }}
-                whileInView={{ scale: 1 }}
-                transition={{
-                  type: "spring",
-                  stiffness: 260,
-                  damping: 20,
-                  delay: 0.2,
-                }}
-              />
-
-              <Card
-                whileHover={{
-                  y: -12,
-                  scale: 1.02,
-                  boxShadow: "0 25px 50px rgba(0,0,0,0.15)",
-                }}
-                style={{
-                  x: isLeft ? -20 : 20,
-                }}
-              >
-                <Role>{exp.role}</Role>
-
-                <Company>{exp.company}</Company>
-
+              <IconBox>{exp.icon}</IconBox>
+              <Meta>
                 <Duration>{exp.duration}</Duration>
-
+                <Company>{exp.company}</Company>
+              </Meta>
+              <Content>
+                <Role>{exp.role}</Role>
                 <Description>{exp.description}</Description>
-              </Card>
-            </Item>
-          );
-        })}
-      </TimelineContainer>
+                <ProofList>
+                  {exp.proof.map((item) => (
+                    <ProofItem key={item}>{item}</ProofItem>
+                  ))}
+                </ProofList>
+                <Tags>
+                  {exp.tools.map((tool) => (
+                    <Tag key={tool}>{tool}</Tag>
+                  ))}
+                </Tags>
+              </Content>
+            </Card>
+          ))}
+        </Timeline>
+      </Inner>
     </Container>
   );
 };

@@ -1,181 +1,187 @@
 import React from "react";
 import styled from "styled-components";
 import { motion } from "framer-motion";
-import { FaExternalLinkAlt, FaBolt } from "react-icons/fa"; // Added FaBolt back
+import { ArrowUpRight, Github } from "lucide-react";
 
-// Import project images
+import cyberThreatImg from "../assets/cyberthreatdetectionsystem.jpeg";
 import jobPortalImg from "../assets/ojbscreen.png";
 import movieTicketImg from "../assets/online-movie-ticketing-system.jpg";
-import cyberThreatImg from "../assets/cyberthreatdetectionsystem.jpeg";
 
-// Styled Components (using Certifications.js as a base)
-const Container = styled.div`
-  /* Style from Certifications.js */
-  padding: 50px; 
-  text-align: center;
-  max-width: 1100px;
-  margin: auto;
+const Container = styled.section`
+  padding: clamp(4rem, 8vw, 6rem) clamp(1.2rem, 5vw, 4rem);
+  background: ${(props) => props.theme.background};
+`;
+
+const Inner = styled.div`
+  width: min(1120px, 100%);
+  margin: 0 auto;
+`;
+
+const Header = styled.div`
+  max-width: 780px;
+  margin-bottom: 2.5rem;
+`;
+
+const SectionLabel = styled.p`
+  margin: 0 0 0.7rem;
+  color: ${(props) => props.theme.accent};
+  font-size: 0.9rem;
+  font-weight: 800;
+  text-transform: uppercase;
 `;
 
 const Title = styled.h1`
-  /* Style from Certifications.js */
-  font-size: 2.5rem;
-  font-weight: bold;
-  margin-bottom: 30px;
-  color: ${(props) => props.theme.skillTextColor}; 
+  margin: 0;
+  color: ${(props) => props.theme.textColor};
+  font-size: clamp(2rem, 4vw, 3rem);
+  line-height: 1.12;
+  font-weight: 900;
+`;
+
+const Subtitle = styled.p`
+  margin: 1rem 0 0;
+  color: ${(props) => props.theme.mutedText};
+  line-height: 1.75;
+  font-size: 1.04rem;
 `;
 
 const ProjectsGrid = styled.div`
-  /* Renamed from CertificationList */
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+
+  @media (max-width: 980px) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  @media (max-width: 680px) {
+    grid-template-columns: 1fr;
+  }
+`;
+
+const Card = styled(motion.article)`
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 25px;
-`;
-
-const Card = styled(motion.a)`
-  /* Style from Certifications.js */
-  background: ${(props) => props.theme.skillCardBg};
-  color: ${(props) => props.theme.skillTextColor};
-  width: 300px; /* Using cert card width */
-  padding: 20px; /* Using cert card padding */
-  border-radius: 16px; /* Using cert card radius */
-  text-decoration: none;
-  box-shadow: 0px 6px 14px rgba(0, 0, 0, 0.12);
-  cursor: pointer;
-
-  &:hover {
-    /* Hover from Certifications.js */
-    transform: scale(1.05) translateY(-8px); 
-    box-shadow: 0px 12px 24px rgba(0, 0, 0, 0.2);
-    background-color: ${(props) => props.theme.hoverBgColor};
-    color: ${(props) => props.theme.hoverTextColor};
-  }
-`;
-
-const ImageWrapper = styled.div`
-  /* Style from Certifications.js */
-  width: 100%;
-  height: 180px;
+  flex-direction: column;
   overflow: hidden;
-  border-radius: 10px;
-
-  img {
-    width: 100%;
-    height: 100%;
-    /* Using 'cover' from Projects.js, as it's better for project images */
-    object-fit: cover; 
-    transition: transform 0.5s ease; /* Added transition from Projects.js */
-    ${Card}:hover & {
-      transform: scale(1.1); /* Added hover-zoom from Projects.js */
-    }
-  }
+  border: 1px solid ${(props) => props.theme.border};
+  border-radius: 8px;
+  background: ${(props) => props.theme.surface};
+  box-shadow: ${(props) => props.theme.cardShadow};
 `;
 
-const CardContent = styled.div`
-  /* Style from Certifications.js but with text-align: left */
-  text-align: left; 
-  margin-top: 15px;
+const Image = styled.img`
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  display: block;
+`;
+
+const Content = styled.div`
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: 1.25rem;
 `;
 
 const ProjectTitle = styled.h2`
-  /* Renamed from CertTitle */
-  font-size: 1.1rem;
-  font-weight: bold;
-  color: ${(props) => props.theme.textColor}; /* Added from Projects.js */
-  margin-bottom: 5px; /* Added from Projects.js */
+  margin: 0;
+  color: ${(props) => props.theme.textColor};
+  font-size: 1.12rem;
+  line-height: 1.35;
 `;
-
-// --- Added back from original Projects.js ---
-const KeyFeature = styled.p`
-  font-size: 0.95rem;
-  margin: 8px 0;
-  font-weight: 600;
-  color: ${(props) => props.theme.accent};
-  display: flex;
-  align-items: center;
-  gap: 6px;
-`;
-
-const TagContainer = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-  margin-top: 15px;
-  min-height: 40px;
-`;
-
-const TechTag = styled.span`
-  background: ${(props) => props.theme.accent}20;
-  color: ${(props) => props.theme.accent};
-  padding: 4px 8px;
-  border-radius: 4px;
-  font-size: 0.75rem;
-  font-weight: 500;
-`;
-// --- End of components from Projects.js ---
 
 const Description = styled.p`
-  /* Style from Certifications.js */
-  font-size: 0.9rem;
-  margin-top: 5px;
-  color: ${(props) => props.theme.skillTextColor};
+  margin: 0.8rem 0 0;
+  color: ${(props) => props.theme.mutedText};
+  line-height: 1.65;
+  font-size: 0.96rem;
 `;
 
-const ViewButton = styled.div`
-  /* Style from Certifications.js */
-  margin-top: 10px;
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  background-color: ${(props) => props.theme.buttonBg};
-  color: ${(props) => props.theme.buttonTextColor};
-  padding: 8px 12px;
-  border-radius: 6px;
-  font-weight: bold;
+const Impact = styled.p`
+  margin: 0.9rem 0 0;
+  padding: 0.75rem;
+  border-radius: 8px;
+  background: ${(props) => props.theme.accentSoft};
+  color: ${(props) => props.theme.textColor};
+  line-height: 1.55;
+  font-size: 0.92rem;
+  font-weight: 650;
+`;
 
-  svg {
-    margin-left: 6px;
+const Tags = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  margin-top: 1rem;
+`;
+
+const Tag = styled.span`
+  padding: 0.35rem 0.5rem;
+  border-radius: 999px;
+  background: ${(props) => props.theme.surfaceSoft};
+  color: ${(props) => props.theme.mutedText};
+  font-size: 0.78rem;
+  font-weight: 700;
+`;
+
+const LinkRow = styled.div`
+  display: flex;
+  gap: 0.65rem;
+  flex-wrap: wrap;
+  margin-top: auto;
+  padding-top: 1.2rem;
+`;
+
+const ProjectLink = styled.a`
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  min-height: 38px;
+  padding: 0 0.75rem;
+  border-radius: 8px;
+  border: 1px solid ${(props) => props.theme.border};
+  color: ${(props) => props.theme.textColor};
+  text-decoration: none;
+  font-size: 0.88rem;
+  font-weight: 800;
+  transition: border-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+
+  &:hover {
+    color: ${(props) => props.theme.accent};
+    border-color: ${(props) => props.theme.accent};
+    transform: translateY(-2px);
   }
 `;
 
-// Project data from your first code block
 const projects = [
   {
     name: "AI-Powered Cyber Threat Detection System",
     description:
-      "Full-stack system for real-time security threat analysis in network logs.",
-    feature:
-      "Key Insight: Implemented Flask AI backend for high-throughput model inference.",
-    tools: ["Java", "Spring Boot", "Flask (Python)", "MongoDB", "React"],
-    link: "https://nadavapalli-lakshman-ai-cyber-threat-detection.vercel.app/",
+      "A deployed full-stack platform for analyzing network logs and presenting threat insights through a React dashboard.",
+    impact:
+      "Engineering focus: Flask model inference, Spring Boot services, MongoDB storage, secure workflows, and real-time dashboard usability.",
+    tools: ["Java", "Spring Boot", "Flask", "MongoDB", "React"],
+    live: "https://nadavapalli-lakshman-ai-cyber-threat-detection.vercel.app/",
     image: cyberThreatImg,
   },
   {
     name: "Scalable Online Job Portal",
     description:
-      "MERN Stack job board focused on low latency and scalability.",
-    feature:
-      "Key Insight: Developed Recommendation Engine using Node.js and MongoDB Aggregation.",
-    tools: [
-      "MongoDB",
-      "Express.js",
-      "React",
-      "Node.js",
-      "MERN Stack",
-      "Resume Parsing",
-    ],
-    link: "https://nadavapalli-lakshman-online-job-portal-using-react-lapy.vercel.app/",
+      "A MERN job portal with candidate/job workflows, backend APIs, resume-oriented features, and deployed frontend access.",
+    impact:
+      "Engineering focus: Node.js APIs, MongoDB aggregation, recommendation logic, reusable React screens, and low-latency data access.",
+    tools: ["MongoDB", "Express", "React", "Node.js", "Resume Parsing"],
+    live: "https://nadavapalli-lakshman-online-job-portal-using-react-lapy.vercel.app/",
     image: jobPortalImg,
   },
   {
     name: "Secure Movie Ticket Booking System",
     description:
-      "A robust system emphasizing security and transactional integrity.",
-    feature:
-      "Key Insight: Token-based Authentication and SQL transaction management for seat locking.",
-    tools: ["JSP", "Servlets", "MySQL", "Red Hat CodeReady", "Java"],
-    link: "https://github.com/LAKSHMAN-NADAVAPALLI/MovieTicketBookingSystem",
+      "A Java web application for seat booking flows with authentication and transaction-oriented database operations.",
+    impact:
+      "Engineering focus: token-based authentication, SQL seat-locking logic, JSP/Servlet architecture, and Red Hat development workflow.",
+    tools: ["Java", "JSP", "Servlets", "MySQL", "Transactions"],
+    github: "https://github.com/LAKSHMAN-NADAVAPALLI/MovieTicketBookingSystem",
     image: movieTicketImg,
   },
 ];
@@ -183,48 +189,52 @@ const projects = [
 const Projects = () => {
   return (
     <Container>
-      <motion.div
-        initial={{ opacity: 0, scale: 0.9 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.6 }}
-      >
-        <Title>Projects</Title> {/* Updated Title */}
-        <ProjectsGrid> {/* Updated Component */}
-          {projects.map((project, index) => ( /* Mapping projects */
-            <Card
-              key={index}
-              href={project.link} /* Using project link */
-              target="_blank"
-              rel="noopener noreferrer"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.1 }}
-            >
-              <ImageWrapper>
-                <img src={project.image} alt={project.name} /> {/* Using project image/name */}
-              </ImageWrapper>
-              <CardContent>
-                <ProjectTitle>{project.name}</ProjectTitle> {/* Using ProjectTitle */}
-                
-                {/* Added KeyFeature, Description, and Tags back in */}
-                <KeyFeature>
-                  <FaBolt size={14} /> {project.feature}
-                </KeyFeature>
-                <Description>{project.description}</Description>
-                <TagContainer>
-                  {project.tools.map((tool, tagIndex) => (
-                    <TechTag key={tagIndex}>{tool}</TechTag>
-                  ))}
-                </TagContainer>
+      <Inner>
+        <Header>
+          <SectionLabel>Projects</SectionLabel>
+          <Title>Selected builds that show backend, full-stack, and cloud readiness.</Title>
+          <Subtitle>
+            Each project is written as a compact case study so hiring teams can quickly understand
+            the problem, technical stack, and engineering contribution.
+          </Subtitle>
+        </Header>
 
-                <ViewButton>
-                  View Project <FaExternalLinkAlt /> {/* Updated text */}
-                </ViewButton>
-              </CardContent>
+        <ProjectsGrid>
+          {projects.map((project, index) => (
+            <Card
+              key={project.name}
+              initial={{ opacity: 0, y: 22 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.45, delay: index * 0.06 }}
+            >
+              <Image src={project.image} alt={project.name} />
+              <Content>
+                <ProjectTitle>{project.name}</ProjectTitle>
+                <Description>{project.description}</Description>
+                <Impact>{project.impact}</Impact>
+                <Tags>
+                  {project.tools.map((tool) => (
+                    <Tag key={tool}>{tool}</Tag>
+                  ))}
+                </Tags>
+                <LinkRow>
+                  {project.live && (
+                    <ProjectLink href={project.live} target="_blank" rel="noopener noreferrer">
+                      Live Demo <ArrowUpRight size={16} />
+                    </ProjectLink>
+                  )}
+                  {project.github && (
+                    <ProjectLink href={project.github} target="_blank" rel="noopener noreferrer">
+                      GitHub <Github size={16} />
+                    </ProjectLink>
+                  )}
+                </LinkRow>
+              </Content>
             </Card>
           ))}
         </ProjectsGrid>
-      </motion.div>
+      </Inner>
     </Container>
   );
 };

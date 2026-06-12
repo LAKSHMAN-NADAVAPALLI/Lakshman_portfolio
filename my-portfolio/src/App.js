@@ -1,81 +1,80 @@
-import React, { useState, useMemo, useEffect } from "react";
-import { Routes, Route, Navigate } from "react-router-dom";
-import styled, { ThemeProvider, createGlobalStyle } from "styled-components";
+import React, { useEffect, useMemo, useState } from "react";
+import { Navigate, Route, Routes } from "react-router-dom";
+import styled, { createGlobalStyle, ThemeProvider } from "styled-components";
 
-// Import components and pages
-import Navbar from "./components/Navbar";
-import Home from "./pages/Home";
-import About from "./pages/About";
-import Skills from "./pages/Skills";
-import Certifications from "./pages/Certifications";
-import Projects from "./pages/Projects";
-import Contact from "./pages/Contact";
-import Resume from "./pages/Resume";
-
-// ✅ Import themes from your separate file
-import { lightTheme, darkTheme } from "./themes";
-
-// ✅ 1. IMPORT THE NEW CURSOR COMPONENT
 import CustomCursor from "./components/CustomCursor";
+import Navbar from "./components/Navbar";
+import About from "./pages/About";
+import Certifications from "./pages/Certifications";
+import Contact from "./pages/Contact";
+import Home from "./pages/Home";
+import Projects from "./pages/Projects";
+import Resume from "./pages/Resume";
+import Skills from "./pages/Skills";
+import { darkTheme, lightTheme } from "./themes";
 
-// 🌐 Global styles
 const GlobalStyle = createGlobalStyle`
-  /* ✅ 2. ADD THIS BLOCK TO HIDE THE DEFAULT CURSOR */
   * {
-    cursor: none !important;
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
   }
 
   body {
     margin: 0;
     padding: 0;
-    font-family: 'Poppins', sans-serif;
+    font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     background: ${(props) => props.theme.background};
-    color: ${(props) => props.theme.textColor || props.theme.text};
-    transition: all 0.5s ease-in-out;
-    scroll-behavior: smooth; 
+    color: ${(props) => props.theme.textColor};
+    transition: background 0.25s ease, color 0.25s ease;
+  }
+
+  a {
+    color: inherit;
+  }
+
+  button,
+  a {
+    font-family: inherit;
+  }
+
+  ::selection {
+    background: ${(props) => props.theme.accentSoft};
+    color: ${(props) => props.theme.textColor};
   }
 `;
 
-// Layout containers
 const Container = styled.div`
   min-height: 100vh;
   display: flex;
   flex-direction: column;
 `;
 
-const ContentWrapper = styled.div`
+const ContentWrapper = styled.main`
   flex: 1;
 `;
 
 const Footer = styled.footer`
-  background: ${(props) =>
-    props.theme.mode === "light"
-      ? `#ffffffff`
-      : "#59555ff"};
-  color: ${(props) => (props.theme.mode === "light" ? "#111" : "#eee")};
+  background: ${(props) => props.theme.surface};
+  color: ${(props) => props.theme.mutedText};
   text-align: center;
-  padding: 1rem 0.8rem;
-  font-size: 0.8rem;
-  font-weight: 600; 
-  backdrop-filter: blur(5px);
-  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 1rem;
+  font-size: 0.9rem;
+  border-top: 1px solid ${(props) => props.theme.border};
 `;
 
 const FooterText = styled.span`
-  color: #e6eb54ff};
-  font-weight: 200;
+  color: ${(props) => props.theme.textColor};
+  font-weight: 700;
 `;
 
 function App() {
-  // 🌗 Theme toggle logic with persistence
-  const [theme, setTheme] = useState(() => {
-    return localStorage.getItem("theme") === "dark" ? darkTheme : lightTheme;
-  });
+  const [theme, setTheme] = useState(() =>
+    localStorage.getItem("theme") === "dark" ? darkTheme : lightTheme
+  );
 
-  /*
-   * We need 'theme.mode' (the string "light" or "dark")
-   * not 'theme' (the whole object)
-   */
   const themeMode = useMemo(() => theme.mode, [theme]);
 
   const toggleTheme = () => {
@@ -84,22 +83,16 @@ function App() {
     localStorage.setItem("theme", newTheme.mode);
   };
 
-  // Set page title
   useEffect(() => {
-    document.title = "NADAVAPALLI LAKSHMAN";
+    document.title = "Nadavapalli Lakshman | Software Engineer";
   }, []);
 
   return (
-    <ThemeProvider theme={theme}> {/* Pass the full theme object here */}
+    <ThemeProvider theme={theme}>
       <GlobalStyle />
-      
-      {/* ✅ 3. ADD THE CUSTOM CURSOR COMPONENT HERE */}
-      <CustomCursor /> 
-
+      <CustomCursor />
       <Container>
-        {/* Pass the themeMode string ("light" or "dark") here */}
         <Navbar toggleTheme={toggleTheme} themeMode={themeMode} />
-
         <ContentWrapper>
           <Routes>
             <Route path="/" element={<Home />} />
@@ -113,7 +106,7 @@ function App() {
           </Routes>
         </ContentWrapper>
         <Footer>
-          &copy; {new Date().getFullYear()} <FooterText> Lakshman's Portfolio </FooterText> | All rights reserved.
+          &copy; {new Date().getFullYear()} <FooterText>Lakshman's Portfolio</FooterText>. Built with React.
         </Footer>
       </Container>
     </ThemeProvider>

@@ -1,156 +1,122 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { motion, AnimatePresence } from "framer-motion";
+import { Moon, Sun } from "lucide-react";
 
-// Styled Navbar Container
 const Nav = styled.nav`
-  background: ${(props) => props.theme.navBackground || "#ffffffff"};
-  padding: 1rem 2rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.2);
-  min-height: 50px;
-  backdrop-filter: blur(8px);
   position: sticky;
   top: 0;
   z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  min-height: 64px;
+  padding: 0.85rem clamp(1rem, 4vw, 3rem);
+  background: ${(props) => props.theme.navBackground};
+  backdrop-filter: ${(props) => props.theme.navBlur};
+  border-bottom: 1px solid ${(props) => props.theme.border};
+
+  @media (max-width: 760px) {
+    align-items: flex-start;
+    flex-direction: column;
+  }
 `;
 
-// Styled Nav Links
+const Brand = styled(Link)`
+  text-decoration: none;
+  color: ${(props) => props.theme.textColor};
+  font-size: 1.05rem;
+  font-weight: 800;
+  letter-spacing: 0;
+  white-space: nowrap;
+`;
+
 const NavLinks = styled.div`
   display: flex;
-  gap: 2.5rem; // Increased gap for better spacing
+  align-items: center;
+  justify-content: flex-end;
+  gap: clamp(0.75rem, 2vw, 1.6rem);
+  flex: 1;
 
   a {
+    color: ${(props) => props.theme.mutedText};
+    font-size: 0.94rem;
+    font-weight: 650;
     text-decoration: none;
-    font-weight: 500; // Less bold is more elegant
-    font-size: 1rem; // Slightly smaller is more professional
-    padding: 0; // Remove all button padding
-    border-radius: 0;
-    color: ${(props) => props.theme.textColor}; // Use main text color
-    background: none; // Remove background
-    border-bottom: 2px solid transparent; // Prepare for elegant underline
-
-    transition: all 0.3s ease;
+    padding: 0.5rem 0.5rem;
+    border-radius: 8px;
+    transition: all 0.2s ease;
 
     &:hover {
       color: ${(props) => props.theme.accent};
-      border-bottom: 2px solid ${(props) => props.theme.accent};
-      background: none;
+      background: ${(props) => props.theme.accentSoft};
+    }
+  }
+
+  @media (max-width: 760px) {
+    width: 100%;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    
+    a {
+      padding: 0.4rem 0.6rem;
     }
   }
 `;
 
-// Theme Button
-const ThemeButton = styled(motion.button)`
-  /* ✅ CHANGED: Use theme mode to set background */
-  background: ${(props) => (props.theme.mode === "light" ? "#FFFFFF" : "#000000")};
-  
-  /* ✅ ADDED: A border to make the button visible */
-  border: 1px solid ${(props) => (props.theme.mode === "light" ? "#1C1B22" : "#EBEBEB")};
-  
-  padding: 0.5rem;
-  cursor: pointer;
-  border-radius: 50%;
-  width: 45px;
-  height: 45px;
-  display: flex;
+const ThemeButton = styled.button`
+  width: 40px;
+  height: 40px;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.3s ease;
-  z-index: 1001; /* Ensure it stays above other content */
+  border-radius: 50%;
+  border: 1px solid ${(props) => props.theme.border};
+  background: ${(props) => props.theme.surface};
+  color: ${(props) => props.theme.textColor};
+  cursor: pointer;
+  transition: transform 0.2s ease, border-color 0.2s ease, color 0.2s ease;
 
   &:hover {
-    transform: scale(1.1);
-    /* ✅ CHANGED: Removed the accent color on hover */
-    background: ${(props) => (props.theme.mode === "light" ? "#FFFFFF" : "#000000")};
-  }
-  
-  svg {
-    width: 26px;
-    height: 26px;
+    transform: translateY(-1px);
+    border-color: ${(props) => props.theme.accent};
+    color: ${(props) => props.theme.accent};
   }
 `;
 
+const Actions = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 1rem;
 
-// --- 🌟 ICON UPDATES HERE 🌟 ---
-
-// SVG icons for professional look
-const HalfSun = () => (
-   <svg
-    viewBox="0 0 24 24"
-    fill="#ff0000ff"
-    strokeWidth="2"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-  >
-    {/* Changed fill to white/light-grey and removed stroke */}
-    <path
-      d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"
-      fill="#FFC107"
-      stroke="none"
-    />
-  </svg>
-);
-
-const CrescentMoon = () => (
- <svg
-    viewBox="0 0 24 24"
-    fill="#ffffffff"
-    strokeWidth="2"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-  >
-    {/* Changed fill and stroke to a sun-yellow */}
-    <circle cx="12" cy="12" r="5" fill="#fff8f8ff" stroke="#ffffffff" />
-    <line x1="12" y1="1" x2="12" y2="4" stroke="#ffffffff" />
-    <line x1="12" y1="20" x2="12" y2="23" stroke="#ffffffff" />
-    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" stroke="#ffffffff" />
-    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" stroke="#ffffffff" />
-    <line x1="1" y1="12" x2="4" y2="12" stroke="#ffffffff" />
-  </svg>
-);
-
-// --- END OF ICON UPDATES ---
-
+  @media (max-width: 760px) {
+    position: absolute;
+    top: 0.75rem;
+    right: 1rem;
+  }
+`;
 
 const Navbar = ({ toggleTheme, themeMode }) => {
   return (
     <Nav>
+      <Brand to="/">Lakshman</Brand>
       <NavLinks>
         <Link to="/">Home</Link>
         <Link to="/about">About</Link>
         <Link to="/skills">Skills</Link>
-        <Link to="/certifications">Certifications</Link>
         <Link to="/projects">Projects</Link>
-        <Link to="/contact">Contact</Link>
+        <Link to="/certifications">Certifications</Link>
         <Link to="/resume">Resume</Link>
+        <Link to="/contact">Contact</Link>
       </NavLinks>
-
-      <AnimatePresence exitBeforeEnter initial={false}>
-        <ThemeButton
-          key={themeMode}
-          onClick={toggleTheme}
-          initial={{ rotate: -90, opacity: 0 }}
-          animate={{ rotate: 0, opacity: 1 }}
-          exit={{ rotate: 90, opacity: 0 }}
-          whileTap={{ scale: 0.9 }}
-          transition={{ type: "spring", stiffness: 300, damping: 20 }}
-        >
-          {/* This logic shows the icon for the CURRENT theme */}
-          {/* Light mode shows Sun, Dark mode shows Moon */}
-          {themeMode === "dark" ? <CrescentMoon /> : <HalfSun />}
+      <Actions>
+        <ThemeButton onClick={toggleTheme} aria-label="Toggle color theme">
+          {themeMode === "dark" ? <Sun size={19} /> : <Moon size={19} />}
         </ThemeButton>
-      </AnimatePresence>
+      </Actions>
     </Nav>
   );
 };
 
 export default Navbar;
-
-/* * NOTE: I have removed the 'lightTheme' and 'darkTheme' exports
- * you had at the bottom of this file. They belong in 'themes.js',
- * not here.
- */
