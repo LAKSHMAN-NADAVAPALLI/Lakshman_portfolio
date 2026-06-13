@@ -25,9 +25,13 @@ const Header = styled.div`
 const SectionLabel = styled.p`
   margin: 0 0 0.7rem;
   color: ${(props) => props.theme.accent};
-  font-size: 0.9rem;
+  font-size: 1.9rem;
   font-weight: 800;
   text-transform: uppercase;
+  
+  display: inline-block;
+  border-bottom: 3px solid ${(props) => props.theme.accent};
+  padding-bottom: 4px;
 `;
 
 const Title = styled.h1`
@@ -162,6 +166,7 @@ const projects = [
       "Engineering focus: Flask model inference, Spring Boot services, MongoDB storage, secure workflows, and real-time dashboard usability.",
     tools: ["Java", "Spring Boot", "Flask", "MongoDB", "React"],
     live: "https://nadavapalli-lakshman-ai-cyber-threat-detection.vercel.app/",
+    github: "https://github.com/LAKSHMAN-NADAVAPALLI/nadavapalli-lakshman-ai-cyber-threat-detection",
     image: cyberThreatImg,
   },
   {
@@ -172,6 +177,7 @@ const projects = [
       "Engineering focus: Node.js APIs, MongoDB aggregation, recommendation logic, reusable React screens, and low-latency data access.",
     tools: ["MongoDB", "Express", "React", "Node.js", "Resume Parsing"],
     live: "https://nadavapalli-lakshman-online-job-portal-using-react-lapy.vercel.app/",
+    github: "https://github.com/LAKSHMAN-NADAVAPALLI/NADAVAPALLI_LAKSHMAN_ONLINE_JOB_PORTAL",
     image: jobPortalImg,
   },
   {

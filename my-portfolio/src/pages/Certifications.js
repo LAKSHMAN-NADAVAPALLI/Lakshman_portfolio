@@ -26,9 +26,13 @@ const Header = styled.div`
 const SectionLabel = styled.p`
   margin: 0 0 0.7rem;
   color: ${(props) => props.theme.accent};
-  font-size: 0.9rem;
+  font-size: 1.9rem;
   font-weight: 800;
   text-transform: uppercase;
+  
+  display: inline-block;
+  border-bottom: 3px solid ${(props) => props.theme.accent};
+  padding-bottom: 4px;
 `;
 
 const Title = styled.h1`

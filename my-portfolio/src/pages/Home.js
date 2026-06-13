@@ -15,7 +15,7 @@ const HeroSection = styled.section`
   min-height: calc(100vh - 64px);
   display: flex;
   align-items: center;
-  padding: clamp(3rem, 8vw, 6rem) clamp(1.2rem, 5vw, 4rem);
+  padding: clamp(1rem, 4vw, 1rem) clamp(1.2rem, 5vw, 4rem);
   background:
     linear-gradient(135deg, ${(props) => props.theme.accentSoft}, transparent 35%),
     ${(props) => props.theme.background};
@@ -42,7 +42,7 @@ const Eyebrow = styled.p`
   border-radius: 999px;
   background: ${(props) => props.theme.surface};
   color: ${(props) => props.theme.accent};
-  font-size: 0.92rem;
+  font-size: 1.02rem;
   font-weight: 750;
 `;
 
@@ -50,8 +50,8 @@ const Headline = styled.h1`
   margin: 0;
   color: ${(props) => props.theme.textColor};
   font-size: clamp(2.55rem, 6vw, 5rem);
-  font-weight: 900;
-  line-height: 1.03;
+  font-weight: 800;
+  line-height: 0.84;
   letter-spacing: 0;
 `;
 
@@ -157,7 +157,7 @@ const ProfilePanel = styled.aside`
 
 const ProfileImage = styled.img`
   width: 100%;
-  aspect-ratio: 4 / 5;
+  aspect-ratio: 1 / 1.2;
   object-fit: cover;
   border-radius: 8px;
   display: block;
@@ -179,25 +179,25 @@ const ProfileNote = styled.div`
 
 const SocialRow = styled.div`
   display: flex;
-  gap: 0.65rem;
+  gap: 2.5rem;
   margin-top: 1rem;
 `;
 
 const IconLink = styled.a`
-  width: 40px;
+  width: 60px;
   height: 40px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   border-radius: 8px;
-  border: 1px solid ${(props) => props.theme.border};
+ border: 1.5px solid #d1ab2c;
   color: ${(props) => props.theme.mutedText};
   text-decoration: none;
   transition: color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
 
   &:hover {
     color: ${(props) => props.theme.accent};
-    border-color: ${(props) => props.theme.accent};
+    border-color: #ffd700;
     transform: translateY(-2px);
   }
 `;

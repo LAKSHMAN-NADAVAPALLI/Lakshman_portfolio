@@ -26,7 +26,7 @@ const Nav = styled.nav`
 const Brand = styled(Link)`
   text-decoration: none;
   color: ${(props) => props.theme.textColor};
-  font-size: 1.05rem;
+  font-size: 1.25rem;
   font-weight: 800;
   letter-spacing: 0;
   white-space: nowrap;
@@ -66,7 +66,7 @@ const NavLinks = styled.div`
 `;
 
 const ThemeButton = styled.button`
-  width: 40px;
+  width: 55px;
   height: 40px;
   display: inline-flex;
   align-items: center;
